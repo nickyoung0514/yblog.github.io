@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="dark" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="//cdn.staticfile.net/Primer/21.0.7/primer.css" rel="stylesheet" />
+    <link rel="icon" href="https://avatars.githubusercontent.com/u/38165902?v=4"><script>
+        let theme = localStorage.getItem("meek_theme") || "light";
+        document.documentElement.setAttribute("data-color-mode", theme);
+    </script>
+<meta name="description" content="## 十种常见排序算法
+
+## 十种常见排序算法可以分为两大类：
+
+-   比较类排序：通过比较来决定元素间的相对次序，由于其时间复杂度不能突破 O(nlog⁡n) ，因此也称为非线性时间比较类排序。">
+<meta property="og:title" content="十种常见排序算法">
+<meta property="og:description" content="## 十种常见排序算法
+
+## 十种常见排序算法可以分为两大类：
+
+-   比较类排序：通过比较来决定元素间的相对次序，由于其时间复杂度不能突破 O(nlog⁡n) ，因此也称为非线性时间比较类排序。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://nickyoung0514.github.io/yblog.github.io/post/shi-zhong-chang-jian-pai-xu-suan-fa.html">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/38165902?v=4">
+<title>十种常见排序算法</title>
+<link href="//unpkg.com/@wooorm/starry-night@2.1.1/style/both.css" rel="stylesheet" />
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">十种常见排序算法</h1>
+<div class="title-right">
+    <a href="https://nickyoung0514.github.io/yblog.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+    <a href="https://github.com/nickyoung0514/yblog.github.io/issues/4" target="_blank" class="btn btn-invisible circle" title="Issue">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathIssue" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><h2>十种常见排序算法</h2>
+<h2>十种常见排序算法可以分为两大类：</h2>
+<ul>
+<li>
+<p>比较类排序：通过比较来决定元素间的相对次序，由于其时间复杂度不能突破 O(nlog⁡n) ，因此也称为非线性时间比较类排序。 包括插入排序、希尔排序、选择排序、堆排序、冒泡排序、快速排序和归并排序。</p>
+</li>
+<li>
+<p>非比较类排序：不通过比较来决定元素间的相对次序，它可以突破基于比较排序的时间下界，以线性时间运行，因此也称为线性时间非比较类排序。包括计数排序、桶排序/和基数排序。</p>
+</li>
+</ul>
+<h2>排序算法时间复杂度</h2>
+<h3>比较类排序算法</h3>
+<table role="table">
+<thead>
+<tr>
+<th><strong>排序算法名称</strong></th>
+<th><strong>平均时间复杂度</strong></th>
+<th><strong>最坏时间复杂度</strong></th>
+<th><strong>最好时间复杂度</strong></th>
+<th><strong>空间复杂度</strong></th>
+<th><strong>稳定性</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>冒泡排序</td>
+<td>θ(n2)</td>
+<td>O(n2)</td>
+<td>Ω(n2)</td>
+<td>O(1)</td>
+<td>稳定</td>
+</tr>
+<tr>
+<td>插入排序</td>
+<td>θ(n2)</td>
+<td>O(n2)</td>
+<td>Ω(n)</td>
+<td>O(1)</td>
+<td>稳定</td>
+</tr>
+<tr>
+<td>希尔排序</td>
+<td>θ(nd) d≈1.5</td>
+<td>O(n2)</td>
+<td>Ω(n)</td>
+<td>O(1)</td>
+<td>不稳定</td>
+</tr>
+<tr>
+<td>选择排序</td>
+<td>θ(n2)</td>
+<td>O(n2)</td>
+<td>Ω(n2)</td>
+<td>O(1)</td>
+<td>不稳定</td>
+</tr>
+<tr>
+<td>堆排序</td>
+<td>θ(nlog⁡n)</td>
+<td>O(nlog⁡n)</td>
+<td>Ω(nlog⁡n)</td>
+<td>O(1)</td>
+<td>不稳定</td>
+</tr>
+<tr>
+<td>快速排序</td>
+<td>θ(nlog⁡n)</td>
+<td>O(n2)</td>
+<td>Ω(nlog⁡n)</td>
+<td>O(nlog⁡n)</td>
+<td>不稳定</td>
+</tr>
+<tr>
+<td>归并排序</td>
+<td>θ(nlog⁡n)</td>
+<td>O(nlog⁡n)</td>
+<td>Ω(nlog⁡n)</td>
+<td>O(n)</td>
+<td>稳定</td>
+</tr>
+</tbody>
+</table>
+<h3>非比较类排序算法</h3>
+<table role="table">
+<thead>
+<tr>
+<th><strong>排序算法名称</strong></th>
+<th><strong>平均时间复杂度</strong></th>
+<th><strong>最坏时间复杂度</strong></th>
+<th><strong>最好时间复杂度</strong></th>
+<th><strong>空间复杂度</strong></th>
+<th><strong>稳定性</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>计数排序</td>
+<td>θ(n+k)</td>
+<td>O(n+k)</td>
+<td>Ω(n+k)</td>
+<td>O(n+k)</td>
+<td>稳定</td>
+</tr>
+<tr>
+<td>桶排序</td>
+<td>θ(n+k)</td>
+<td>O(n2)</td>
+<td>Ω(n)</td>
+<td>O(n+k)</td>
+<td>稳定</td>
+</tr>
+<tr>
+<td>基数排序</td>
+<td>θ(n×k)</td>
+<td>O(n×k)</td>
+<td>Ω(n×k)</td>
+<td>O(n+k)</td>
+<td>稳定</td>
+</tr>
+</tbody>
+</table>
+<h2>相关概念</h2>
+<ul>
+<li><strong>稳定</strong>：如果 a 原本在 b 前面，而 a=b ，排序之后 a 仍然在 b 的前面。</li>
+<li><strong>不稳定</strong>：如果 a 原本在 b 的前面，而 a=b ，排序之后 a 可能会出现在 b 的后面。</li>
+<li><strong>时间复杂度</strong>：对排序数据的总的操作次数。反映当 n 变化时，操作次数呈现什么规律。</li>
+<li><strong>空间复杂度</strong>：是指算法在计算机内执行时所需存储空间的度量，它也是数据规模 n 的函数。</li>
+</ul>
+<h2>1冒泡排序(Bubble−Sort)</h2>
+<h3>1.1算法流程</h3>
+<p>我们遍历数组至多 n 次，（那是已经排好序了）每次判断相邻两个数前一个是否大于后一个，如果大于后一个，就交换，否则不变。</p>
+<h3>1.2动图演示</h3>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/nickyoung0514/yblog.github.io/assets/38165902/d2624fc0-abee-4feb-9147-1d9fb814c528"><img src="https://github.com/nickyoung0514/yblog.github.io/assets/38165902/d2624fc0-abee-4feb-9147-1d9fb814c528" alt="image" style="max-width: 100%;"></a></p>
+<h3>1.3代码</h3>
+<div class="highlight highlight-source-c++"><pre class="notranslate">#<span class="pl-k">include</span> <span class="pl-s"><span class="pl-pds">&lt;</span>iostream<span class="pl-pds">&gt;</span></span>
+<span class="pl-k">using</span> <span class="pl-k">namespace</span> <span class="pl-en">std</span><span class="pl-k">;</span>
+<span class="pl-k">const</span> <span class="pl-k">int</span> N = <span class="pl-c1">100010</span>;
+<span class="pl-k">int</span> n;
+<span class="pl-k">int</span> a[N];
+<span class="pl-k">int</span> <span class="pl-en">main</span> () {
+    cin &gt;&gt; n;
+    <span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">1</span>;i &lt;= n;i++) cin &gt;&gt; a[i];
+    <span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">1</span>;i &lt;= n-<span class="pl-c1">1</span>;i++) {
+        <span class="pl-k">for</span> (<span class="pl-k">int</span> j = <span class="pl-c1">1</span>;j &lt;= n - i;j++) {
+            <span class="pl-k">if</span> (a[j] &gt; a[j + <span class="pl-c1">1</span>]) <span class="pl-c1">swap</span> (a[j],a[j + <span class="pl-c1">1</span>]);
+        }
+    }
+    <span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">1</span>;i &lt;= n;i++) cout &lt;&lt; a[i] &lt;&lt; <span class="pl-s"><span class="pl-pds">'</span> <span class="pl-pds">'</span></span>;
+    <span class="pl-k">return</span> <span class="pl-c1">0</span>;
+}</pre></div>
+<h2>2插入排序(Insertion−Sort)</h2>
+<h3>2.1算法流程</h3>
+<p>我们把未排序的数中的第一个数放到它该放在的位置（即前一个数小于它并且后一个数大于它的位置）。执行 n 次，就能得到排好序的数组。</p>
+<h3>2.2动图演示</h3>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/nickyoung0514/yblog.github.io/assets/38165902/2e7ee1b7-9950-4060-9a7b-aedea6b84a1d"><img src="https://github.com/nickyoung0514/yblog.github.io/assets/38165902/2e7ee1b7-9950-4060-9a7b-aedea6b84a1d" alt="image" style="max-width: 100%;"></a></p>
+<h3>2.3代码</h3>
+<div class="highlight highlight-source-c++"><pre class="notranslate">#<span class="pl-k">include</span> <span class="pl-s"><span class="pl-pds">&lt;</span>iostream<span class="pl-pds">&gt;</span></span>
+<span class="pl-k">using</span> <span class="pl-k">namespace</span> <span class="pl-en">std</span><span class="pl-k">;</span>
+<span class="pl-k">const</span> <span class="pl-k">int</span> N = <span class="pl-c1">100010</span>;
+<span class="pl-k">int</span> n;
+<span class="pl-k">int</span> a[N];
+<span class="pl-k">int</span> <span class="pl-en">main</span> () {
+    cin &gt;&gt; n;
+    <span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">1</span>;i &lt;= n;i++) cin &gt;&gt; a[i];
+    <span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">1</span>;i &lt;= n;i++) {
+        <span class="pl-k">for</span> (<span class="pl-k">int</span> j = i - <span class="pl-c1">1</span>;j &gt;= <span class="pl-c1">1</span> &amp;&amp; a[j] &gt; a[j + <span class="pl-c1">1</span>];j--) <span class="pl-c1">swap</span> (a[j + <span class="pl-c1">1</span>],a[j]);
+    }
+    <span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">1</span>;i &lt;= n;i++) cout &lt;&lt; a[i] &lt;&lt; <span class="pl-s"><span class="pl-pds">'</span> <span class="pl-pds">'</span></span>;
+    <span class="pl-k">return</span> <span class="pl-c1">0</span>;
+}</pre></div>
+<h2>3希尔排序(Shell−Sort)</h2>
+<h3>3.1算法流程</h3>
+<p>选择一个增量序列 t1,t2,…,tk 其中 ti&gt;tj 且 tk=1 。<br>
+按增量序列个数 k ，对序列进行 k 趟排序；<br>
+每趟排序，根据对应的增量 ti ，将待排序列分割成若干长度为 m 的子序列，分别对各子表进行直接插入排序。仅增量因子为 1 时，整个序列作为一个表来处理，表长度即为整个序列的长度。<br>
+这里当 ∀ i∈[2,n] ，都有 ai=ai−1×3+1 时，速度最快。</p>
+<h3>3.2动图演示</h3>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/nickyoung0514/yblog.github.io/assets/38165902/f7f22f9d-06a8-44ae-af10-8926331c5104"><img src="https://github.com/nickyoung0514/yblog.github.io/assets/38165902/f7f22f9d-06a8-44ae-af10-8926331c5104" alt="image" style="max-width: 100%;"></a></p>
+<h3>3.3代码</h3>
+<div class="highlight highlight-source-c++"><pre class="notranslate">#<span class="pl-k">include</span> <span class="pl-s"><span class="pl-pds">&lt;</span>iostream<span class="pl-pds">&gt;</span></span>
+<span class="pl-k">using</span> <span class="pl-k">namespace</span> <span class="pl-en">std</span><span class="pl-k">;</span>
+<span class="pl-k">const</span> <span class="pl-k">int</span> N = <span class="pl-c1">100010</span>;
+<span class="pl-k">int</span> n;
+<span class="pl-k">int</span> a[N];
+<span class="pl-k">int</span> <span class="pl-en">main</span> () {
+    cin &gt;&gt; n;
+    <span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">1</span>;i &lt;= n;i++) cin &gt;&gt; a[i];
+    <span class="pl-k">int</span> gap = <span class="pl-c1">1</span>;
+    <span class="pl-k">while</span> (gap &lt; n / <span class="pl-c1">3</span>) gap = gap * <span class="pl-c1">3</span> + <span class="pl-c1">1</span>;
+    <span class="pl-k">while</span> (gap) {
+        <span class="pl-k">for</span> (<span class="pl-k">int</span> i = gap;i &lt;= n;i++) {
+            <span class="pl-k">for</span> (<span class="pl-k">int</span> j = i;j &gt;= gap &amp;&amp; a[j - gap] &gt; a[j];j--)<span class="pl-c1">swap</span> (a[j - gap],a[j]);
+        }
+        gap /= <span class="pl-c1">3</span>;
+    }
+    <span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">1</span>;i &lt;= n;i++) cout &lt;&lt; a[i] &lt;&lt; <span class="pl-s"><span class="pl-pds">'</span> <span class="pl-pds">'</span></span>;
+    <span class="pl-k">return</span> <span class="pl-c1">0</span>;
+}</pre></div>
+<h2>4选择排序(Selection−Sort)</h2>
+<h3>4.1算法流程</h3>
+<p>首先在未排序序列中找到最小元素，存放到排序序列的起始位置，然后，再从剩余未排序元素中继续寻找最小元素，然后放到第二个位置。以此类推，直到所有元素均排序完毕。</p>
+<h3>4.2动图演示</h3>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/nickyoung0514/yblog.github.io/assets/38165902/91606c2d-c950-4dd2-8e84-073f62fe23a1"><img src="https://github.com/nickyoung0514/yblog.github.io/assets/38165902/91606c2d-c950-4dd2-8e84-073f62fe23a1" alt="image" style="max-width: 100%;"></a></p>
+<h3>4.3代码</h3>
+<div class="highlight highlight-source-c++"><pre class="notranslate">#<span class="pl-k">include</span> <span class="pl-s"><span class="pl-pds">&lt;</span>iostream<span class="pl-pds">&gt;</span></span>
+<span class="pl-k">using</span> <span class="pl-k">namespace</span> <span class="pl-en">std</span><span class="pl-k">;</span>
+<span class="pl-k">const</span> <span class="pl-k">int</span> N = <span class="pl-c1">100010</span>;
+<span class="pl-k">int</span> n;
+<span class="pl-k">int</span> a[N];
+<span class="pl-k">int</span> <span class="pl-en">main</span> () {
+    cin &gt;&gt; n;
+    <span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">1</span>;i &lt;= n;i++) cin &gt;&gt; a[i];
+    <span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">1</span>;i &lt;= n;i++) {
+        <span class="pl-k">int</span> pos = i;
+        <span class="pl-k">for</span> (<span class="pl-k">int</span> j = i;j &lt;= n;j++) {
+            <span class="pl-k">if</span> (a[j] &lt; a[pos]) pos = j;
+        }
+        <span class="pl-c1">swap</span> (a[i],a[pos]);
+    }
+    <span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">1</span>;i &lt;= n;i++) cout &lt;&lt; a[i] &lt;&lt; <span class="pl-s"><span class="pl-pds">'</span> <span class="pl-pds">'</span></span>;
+    <span class="pl-k">return</span> <span class="pl-c1">0</span>;
+}
+</pre></div>
+<h2>5堆排序(Heap−Sort)</h2>
+<h3>5.1算法流程</h3>
+<p><a href="https://www.cnblogs.com/JVxie/p/4859889.html" rel="nofollow">堆</a>存储的数据具有单调性，每次取出堆的最小值放到数组中，再从堆里删除这个数，执行 n 次后，数组就是排好序的数组。</p>
+<h3>5.2动图演示</h3>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/nickyoung0514/yblog.github.io/assets/38165902/b3ab7180-f8da-42dd-8c3f-347cf4a8c81b"><img src="https://github.com/nickyoung0514/yblog.github.io/assets/38165902/b3ab7180-f8da-42dd-8c3f-347cf4a8c81b" alt="image" style="max-width: 100%;"></a></p>
+<h3>5.3代码</h3>
+<div class="highlight highlight-source-c++"><pre class="notranslate">#<span class="pl-k">include</span> <span class="pl-s"><span class="pl-pds">&lt;</span>bits/stdc++.h<span class="pl-pds">&gt;</span></span>
+<span class="pl-k">using</span> <span class="pl-k">namespace</span> <span class="pl-en">std</span><span class="pl-k">;</span>
+<span class="pl-k">const</span> <span class="pl-k">int</span> N = <span class="pl-c1">100010</span>;
+<span class="pl-k">int</span> n,m;
+<span class="pl-k">int</span> h[N],s;
+<span class="pl-k">void</span> <span class="pl-en">down</span> (<span class="pl-k">int</span> u) {
+    <span class="pl-k">int</span> t = u;
+    <span class="pl-k">if</span> (u * <span class="pl-c1">2</span> &lt;= s &amp;&amp; h[u * <span class="pl-c1">2</span>] &lt; h[t]) t = u * <span class="pl-c1">2</span>;
+    <span class="pl-k">if</span> (u * <span class="pl-c1">2</span> + <span class="pl-c1">1</span> &lt;= s &amp;&amp; h[u * <span class="pl-c1">2</span> + <span class="pl-c1">1</span>] &lt; h[t]) t = u * <span class="pl-c1">2</span> + <span class="pl-c1">1</span>;
+    <span class="pl-k">if</span> (u != t) {
+        <span class="pl-c1">swap</span> (h[u],h[t]);
+        <span class="pl-c1">down</span> (t);
+    }
+}
+<span class="pl-k">int</span> <span class="pl-en">main</span> () {
+    cin &gt;&gt; n &gt;&gt; m;
+    <span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">1</span>;i &lt;= n;i++) cin &gt;&gt; h[i];
+    s = n;
+    <span class="pl-k">for</span> (<span class="pl-k">int</span> i = n / <span class="pl-c1">2</span>;i &gt;= <span class="pl-c1">1</span>;i--) <span class="pl-c1">down</span> (i);
+    <span class="pl-k">while</span> (m--) {
+        cout &lt;&lt; h[<span class="pl-c1">1</span>] &lt;&lt; <span class="pl-s"><span class="pl-pds">'</span> <span class="pl-pds">'</span></span>;
+        h[<span class="pl-c1">1</span>] = h[s--];
+        <span class="pl-c1">down</span> (<span class="pl-c1">1</span>);
+    }
+    <span class="pl-k">return</span> <span class="pl-c1">0</span>;
+}</pre></div>
+<h2>6快速排序(Quick−Sort)</h2>
+<h3>6.1算法流程</h3>
+<p>我们分别从数组的最前面和最后面枚举两个变量，再选一个数作为标准，如果左边的变量只想的数大于标准并且右边的变量指向的数小于标准的话，就叫唤这两个数。等到执行完了（即左边的变量跑到右边的变量的右边去了），就分别递归排序两边。</p>
+<h3>6.2动图演示</h3>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/nickyoung0514/yblog.github.io/assets/38165902/46685250-0163-44e4-86ae-b5d66d02683f"><img src="https://github.com/nickyoung0514/yblog.github.io/assets/38165902/46685250-0163-44e4-86ae-b5d66d02683f" alt="image" style="max-width: 100%;"></a></p>
+<h3>6.3代码</h3>
+<div class="highlight highlight-source-c++"><pre class="notranslate">#<span class="pl-k">include</span> <span class="pl-s"><span class="pl-pds">&lt;</span>iostream<span class="pl-pds">&gt;</span></span>
+<span class="pl-k">using</span> <span class="pl-k">namespace</span> <span class="pl-en">std</span><span class="pl-k">;</span>
+<span class="pl-k">const</span> <span class="pl-k">int</span> N = <span class="pl-c1">100010</span>;
+<span class="pl-k">int</span> n;
+<span class="pl-k">int</span> a[N];
+<span class="pl-k">void</span> <span class="pl-en">quickSort</span> (<span class="pl-k">int</span> a[],<span class="pl-k">int</span> l,<span class="pl-k">int</span> r) {
+    <span class="pl-k">if</span> (l &gt;= r) <span class="pl-k">return</span> ;
+    <span class="pl-k">int</span> x = a[(l + r + <span class="pl-c1">1</span>)/<span class="pl-c1">2</span>],i = l - <span class="pl-c1">1</span>,j = r + <span class="pl-c1">1</span>;  <span class="pl-c"><span class="pl-c">//</span>这里取中间的话要取(l + r + 1) / 2，否则会超时</span>
+    <span class="pl-k">while</span> (i &lt; j) {
+        <span class="pl-k">do</span> i++; <span class="pl-k">while</span> (a[i] &lt; x);
+        <span class="pl-k">do</span> j--; <span class="pl-k">while</span> (a[j] &gt; x);
+        <span class="pl-k">if</span> (i &lt; j) <span class="pl-c1">swap</span> (a[i],a[j]);
+    }
+    <span class="pl-c1">quickSort</span> (a,l,i - <span class="pl-c1">1</span>),<span class="pl-c1">quickSort</span> (a,i,r);
+}
+<span class="pl-k">int</span> <span class="pl-en">main</span> () {
+    cin &gt;&gt; n;
+    <span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">1</span>;i &lt;= n;i++) cin &gt;&gt; a[i];
+    <span class="pl-c1">quickSort</span> (a,<span class="pl-c1">1</span>,n);
+    <span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">1</span>;i &lt;= n;i++) cout &lt;&lt; a[i] &lt;&lt; <span class="pl-s"><span class="pl-pds">'</span> <span class="pl-pds">'</span></span>;
+    <span class="pl-k">return</span> <span class="pl-c1">0</span>;
+}</pre></div>
+<h2>7归并排序(Merge−Sort)</h2>
+<h3>7.1算法流程</h3>
+<p>把一段数组从中间分开，左边和右边分别执行归并排序，执行好后把左右的有序数组归并成一个。</p>
+<h3>7.2动图演示</h3>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/nickyoung0514/yblog.github.io/assets/38165902/a2f29fe0-eb89-4d7d-ba1d-56fa12fd8cf6"><img src="https://github.com/nickyoung0514/yblog.github.io/assets/38165902/a2f29fe0-eb89-4d7d-ba1d-56fa12fd8cf6" alt="image" style="max-width: 100%;"></a></p>
+<h2>7.3代码</h2>
+<div class="highlight highlight-source-c++"><pre class="notranslate">#<span class="pl-k">include</span> <span class="pl-s"><span class="pl-pds">&lt;</span>iostream<span class="pl-pds">&gt;</span></span>
+<span class="pl-k">using</span> <span class="pl-k">namespace</span> <span class="pl-en">std</span><span class="pl-k">;</span>
+<span class="pl-k">const</span> <span class="pl-k">int</span> N = <span class="pl-c1">100010</span>;
+<span class="pl-k">int</span> n;
+<span class="pl-k">int</span> a[N],tmp[N];
+<span class="pl-k">void</span> <span class="pl-en">mergeSort</span> (<span class="pl-k">int</span> a[],<span class="pl-k">int</span> l,<span class="pl-k">int</span> r) {
+    <span class="pl-k">if</span> (l &gt;= r) <span class="pl-k">return</span> ;
+    <span class="pl-k">int</span> mid = l + r &gt;&gt; <span class="pl-c1">1</span>;
+    <span class="pl-c1">mergeSort</span> (a,l,mid),<span class="pl-c1">mergeSort</span> (a,mid + <span class="pl-c1">1</span>,r);
+    <span class="pl-k">int</span> k = <span class="pl-c1">1</span>,i = l,j = mid+<span class="pl-c1">1</span>;
+    <span class="pl-k">while</span> (i &lt;= mid &amp;&amp; j &lt;= r) {
+        <span class="pl-k">if</span> (a[i] &lt;= a[j]) tmp[k++] = a[i++];
+        <span class="pl-k">else</span> tmp[k++] = a[j++];
+    }
+    <span class="pl-k">while</span> (i &lt;= mid) tmp[k++] = a[i++];
+    <span class="pl-k">while</span> (j &lt;= r) tmp[k++] = a[j++];
+    <span class="pl-k">for</span> (i = l,j = <span class="pl-c1">1</span>;i &lt;= r;i++,j++) a[i] = tmp[j];
+}
+<span class="pl-k">int</span> <span class="pl-en">main</span> () {
+    cin &gt;&gt; n;
+    <span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">1</span>;i &lt;= n;i++) cin &gt;&gt; a[i];
+    <span class="pl-c1">mergeSort</span> (a,<span class="pl-c1">1</span>,n);
+    <span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">1</span>;i &lt;= n;i++) cout &lt;&lt; a[i] &lt;&lt; <span class="pl-s"><span class="pl-pds">'</span> <span class="pl-pds">'</span></span>;
+    <span class="pl-k">return</span> <span class="pl-c1">0</span>;
+}
+</pre></div>
+<h2>8计数排序(Counting−Sort)</h2>
+<h3>8.1算法流程</h3>
+<p>统计每个数的数量，最后按序取出即可。</p>
+<h3>8.2动图演示</h3>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/nickyoung0514/yblog.github.io/assets/38165902/22569cf1-8d26-4428-8fa2-4423bf00214e"><img src="https://github.com/nickyoung0514/yblog.github.io/assets/38165902/22569cf1-8d26-4428-8fa2-4423bf00214e" alt="image" style="max-width: 100%;"></a><br>
+<a target="_blank" rel="noopener noreferrer" href="https://github.com/nickyoung0514/yblog.github.io/assets/38165902/6d77ddf1-f865-45d6-aab2-ab62d065278f"><img src="https://github.com/nickyoung0514/yblog.github.io/assets/38165902/6d77ddf1-f865-45d6-aab2-ab62d065278f" alt="image" style="max-width: 100%;"></a></p>
+<h3>8.3代码</h3>
+<div class="highlight highlight-source-c++"><pre class="notranslate">#<span class="pl-k">include</span> <span class="pl-s"><span class="pl-pds">&lt;</span>iostream<span class="pl-pds">&gt;</span></span>
+<span class="pl-k">using</span> <span class="pl-k">namespace</span> <span class="pl-en">std</span><span class="pl-k">;</span>
+<span class="pl-k">const</span> <span class="pl-k">int</span> N = <span class="pl-c1">100010</span>,M = <span class="pl-c1">100000010</span>;
+<span class="pl-k">int</span> n;
+<span class="pl-k">int</span> cnt[M];
+<span class="pl-k">int</span> <span class="pl-en">main</span> () {
+    cin &gt;&gt; n;
+    <span class="pl-k">int</span> minx = <span class="pl-c1">2e9</span>,maxx = -<span class="pl-c1">2e9</span>;
+    <span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">1</span>;i &lt;= n;i++) {
+        <span class="pl-k">int</span> x;
+        cin &gt;&gt; x;
+        cnt[x]++;
+        minx = <span class="pl-c1">min</span> (minx,x),maxx = <span class="pl-c1">max</span> (maxx,x);
+    }
+    <span class="pl-k">for</span> (<span class="pl-k">int</span> i = minx;i &lt;= maxx;i++) {
+        <span class="pl-k">while</span> (cnt[i]--) cout &lt;&lt; i &lt;&lt; <span class="pl-s"><span class="pl-pds">'</span> <span class="pl-pds">'</span></span>;
+    }
+    <span class="pl-k">return</span> <span class="pl-c1">0</span>;
+}</pre></div>
+<h2>9桶排序(Bucket−Sort)</h2>
+<h3>9.1算法流程</h3>
+<p>把所有数据分成几个桶，每个桶里分别用独自的排序算法（如冒泡排序，插入排序都可以）。</p>
+<h3>9.2动图演示</h3>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/nickyoung0514/yblog.github.io/assets/38165902/2cdefd92-1658-4645-bb22-36c43f2ad3ca"><img src="https://github.com/nickyoung0514/yblog.github.io/assets/38165902/2cdefd92-1658-4645-bb22-36c43f2ad3ca" alt="image" style="max-width: 100%;"></a></p>
+<h3>9.3代码</h3>
+<div class="highlight highlight-source-c++"><pre class="notranslate">#<span class="pl-k">include</span> <span class="pl-s"><span class="pl-pds">&lt;</span>iostream<span class="pl-pds">&gt;</span></span>
+#<span class="pl-k">include</span> <span class="pl-s"><span class="pl-pds">&lt;</span>vector<span class="pl-pds">&gt;</span></span>
+<span class="pl-k">using</span> <span class="pl-k">namespace</span> <span class="pl-en">std</span><span class="pl-k">;</span>
+<span class="pl-k">const</span> <span class="pl-k">int</span> N = <span class="pl-c1">100010</span>;
+<span class="pl-k">int</span> n;
+<span class="pl-k">int</span> a[N];
+<span class="pl-k">int</span> minx,maxx;
+<span class="pl-k">int</span> bucket_cnt = <span class="pl-c1">40</span>;
+vector &lt;<span class="pl-k">int</span>&gt; bucket[<span class="pl-c1">50</span>];
+<span class="pl-k">void</span> <span class="pl-en">bubble_sort</span> (<span class="pl-k">int</span> x) {
+    <span class="pl-k">int</span> m = bucket[x].<span class="pl-c1">size</span> ();
+    <span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">0</span>;i &lt; m;i++) {
+        <span class="pl-k">for</span> (<span class="pl-k">int</span> j = <span class="pl-c1">0</span>;j &lt; m - i - <span class="pl-c1">1</span>;j++) {
+            <span class="pl-k">if</span> (a[j] &gt; a[j + <span class="pl-c1">1</span>]) <span class="pl-c1">swap</span> (a[j],a[j + <span class="pl-c1">1</span>]);
+        }
+    }
+}
+<span class="pl-k">int</span> <span class="pl-en">main</span> () {
+    cin &gt;&gt; n;
+    minx = <span class="pl-c1">2e9</span>,maxx = -<span class="pl-c1">2e9</span>;
+    <span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">1</span>;i &lt;= n;i++) {
+        cin &gt;&gt; a[i];
+        minx = <span class="pl-c1">min</span> (minx,a[i]),maxx = <span class="pl-c1">max</span> (maxx,a[i]);
+    }
+    <span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">1</span>;i &lt;= n;i++) {
+        <span class="pl-k">int</span> t = (a[i] - minx) / ((maxx - minx + <span class="pl-c1">1</span>) / <span class="pl-c1">40.0</span>);
+        bucket[t].<span class="pl-c1">push_back</span> (a[i]);
+    }
+    <span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">0</span>;i &lt;= bucket_cnt;i++)  {
+        <span class="pl-k">if</span> (bucket[i].<span class="pl-c1">size</span> ()) <span class="pl-c1">bubble_sort</span> (i);  <span class="pl-c"><span class="pl-c">//</span>这里可以用任意排序算法，这里就用冒泡排序了</span>
+    }
+    <span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">0</span>;i &lt;= bucket_cnt;i++) {
+        <span class="pl-k">for</span> (<span class="pl-k">int</span> j = <span class="pl-c1">0</span>;j &lt; bucket[i].<span class="pl-c1">size</span> ();j++) cout &lt;&lt; bucket[i][j] &lt;&lt; <span class="pl-s"><span class="pl-pds">'</span> <span class="pl-pds">'</span></span>;
+    }
+    <span class="pl-k">return</span> <span class="pl-c1">0</span>;
+}</pre></div>
+<h2>10基数排序(Radix−Sort)</h2>
+<h3>10.1算法流程</h3>
+<p>我们把所有数先按个位放进十个桶，（按个位数的大小，比如各位是 0 ，就放在编号为 0 的桶），然后按先放入的先取出，（即 FIFO ，否则就不仅不稳定了，还可能破坏顺序）接着再按十位排序，（注意没有十位用 0 表示，更高位也是这样）再按按先放入的先取出。一直到所有数的这一位都是 0 ，就可以退出了。</p>
+<h3>10.2动图演示</h3>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/nickyoung0514/yblog.github.io/assets/38165902/30a4b20e-06e0-45ca-8a05-d54b6571bf9c"><img src="https://github.com/nickyoung0514/yblog.github.io/assets/38165902/30a4b20e-06e0-45ca-8a05-d54b6571bf9c" alt="image" style="max-width: 100%;"></a></p>
+<h3>10.3代码</h3>
+<div class="highlight highlight-source-c++"><pre class="notranslate">#<span class="pl-k">include</span> <span class="pl-s"><span class="pl-pds">&lt;</span>iostream<span class="pl-pds">&gt;</span></span>
+#<span class="pl-k">include</span> <span class="pl-s"><span class="pl-pds">&lt;</span>vector<span class="pl-pds">&gt;</span></span>
+<span class="pl-k">using</span> <span class="pl-k">namespace</span> <span class="pl-en">std</span><span class="pl-k">;</span>
+<span class="pl-k">const</span> <span class="pl-k">int</span> N = <span class="pl-c1">100010</span>;
+<span class="pl-k">int</span> n;
+<span class="pl-k">int</span> a[N];
+vector &lt;<span class="pl-k">int</span>&gt; bucket[<span class="pl-c1">10</span>];
+<span class="pl-k">int</span> <span class="pl-en">main</span> () {
+    cin &gt;&gt; n;
+    <span class="pl-k">int</span> maxx = -<span class="pl-c1">2e9</span>;
+    <span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">1</span>;i &lt;= n;i++) {
+        cin &gt;&gt; a[i];
+        maxx = <span class="pl-c1">max</span> (maxx,a[i]);
+    }
+    <span class="pl-k">int</span> radix = <span class="pl-c1">1</span>;
+    <span class="pl-k">while</span> (radix &lt;= maxx) {
+        <span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">0</span>;i &lt;= <span class="pl-c1">9</span>;i++) bucket[i].<span class="pl-c1">clear</span> ();
+        <span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">1</span>;i &lt;= n;i++) bucket[a[i] / radix % <span class="pl-c1">10</span>].<span class="pl-c1">push_back</span> (a[i]);
+        <span class="pl-k">int</span> k = <span class="pl-c1">1</span>;
+        <span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">0</span>;i &lt;= <span class="pl-c1">9</span>;i++) {
+            <span class="pl-k">for</span> (<span class="pl-k">int</span> x : bucket[i]) a[k++] = x;
+        }
+        radix = radix * <span class="pl-c1">10</span>;
+    }
+    <span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">1</span>;i &lt;= n;i++) cout &lt;&lt; a[i] &lt;&lt; <span class="pl-s"><span class="pl-pds">'</span> <span class="pl-pds">'</span></span>;
+    <span class="pl-k">return</span> <span class="pl-c1">0</span>;
+}
+</pre></div>
+<h2>不常见排序算法</h2>
+<table role="table">
+<thead>
+<tr>
+<th><strong>排序算法名称</strong></th>
+<th><strong>平均时间复杂度</strong></th>
+<th><strong>最坏时间复杂度</strong></th>
+<th><strong>最好时间复杂度</strong></th>
+<th><strong>空间复杂度</strong></th>
+<th><strong>稳定性</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>鸡尾酒排序</td>
+<td>θ(n2)</td>
+<td>O(n2)</td>
+<td>Ω(n)</td>
+<td>O(1)</td>
+<td>稳定</td>
+</tr>
+<tr>
+<td>猴子排序</td>
+<td>θ(+∞)</td>
+<td>O(+∞)</td>
+<td>Ω(n)</td>
+<td>O(1)</td>
+<td>不稳定</td>
+</tr>
+<tr>
+<td>珠排序</td>
+<td>θ(n)</td>
+<td>O(n)</td>
+<td>Ω(n)</td>
+<td>unknow</td>
+<td>unknow</td>
+</tr>
+</tbody>
+</table>
+<h2>1鸡尾酒排序 (cocktail−sort)</h2>
+<h3>1.1算法流程</h3>
+<p>类似与冒泡排序。只有一点不同：如果在第奇数次遍历，就从前往后遍历，否则就从后往前遍历</p>
+<h3>1.2代码</h3>
+<div class="highlight highlight-source-c++"><pre class="notranslate">#<span class="pl-k">include</span> <span class="pl-s"><span class="pl-pds">&lt;</span>iostream<span class="pl-pds">&gt;</span></span>
+<span class="pl-k">using</span> <span class="pl-k">namespace</span> <span class="pl-en">std</span><span class="pl-k">;</span>
+<span class="pl-k">const</span> <span class="pl-k">int</span> N = <span class="pl-c1">100010</span>;
+<span class="pl-k">int</span> n;
+<span class="pl-k">int</span> a[N];
+<span class="pl-k">int</span> <span class="pl-en">main</span> () {
+    cin &gt;&gt; n;
+    <span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">1</span>;i &lt;= n;i++) cin &gt;&gt; a[i];
+    <span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">1</span>;i &lt;= n;i++) {
+        <span class="pl-k">if</span> (i &amp; <span class="pl-c1">1</span>) {
+            <span class="pl-k">for</span> (<span class="pl-k">int</span> j = <span class="pl-c1">1</span>;j &lt;= n - i - <span class="pl-c1">1</span>;j++) {
+                <span class="pl-k">if</span> (a[j] &gt; a[j + <span class="pl-c1">1</span>]) <span class="pl-c1">swap</span> (a[j],a[j + <span class="pl-c1">1</span>]);
+            }
+        }
+        <span class="pl-k">else</span> {
+            <span class="pl-k">for</span> (<span class="pl-k">int</span> j = n - i - <span class="pl-c1">1</span>;j &gt;= <span class="pl-c1">1</span>;j--) {
+                <span class="pl-k">if</span> (a[j] &gt; a[j + <span class="pl-c1">1</span>]) <span class="pl-c1">swap</span> (a[j],a[j + <span class="pl-c1">1</span>]);
+            }
+        }
+    }
+    <span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">1</span>;i &lt;= n;i++) cout &lt;&lt; a[i] &lt;&lt; <span class="pl-s"><span class="pl-pds">'</span> <span class="pl-pds">'</span></span>;
+    <span class="pl-k">return</span> <span class="pl-c1">0</span>;
+}
+</pre></div>
+<h2>2猴子排序 (bogo−sort)</h2>
+<h3>2.1算法流程</h3>
+<p>随机打乱数组，有 1n! 的概率会变有序，但不要用这个排序，否则你会后悔的。。。</p>
+<h3>2.2代码</h3>
+<div class="highlight highlight-source-c++"><pre class="notranslate">#<span class="pl-k">include</span> <span class="pl-s"><span class="pl-pds">&lt;</span>iostream<span class="pl-pds">&gt;</span></span>
+#<span class="pl-k">include</span> <span class="pl-s"><span class="pl-pds">&lt;</span>algorithm<span class="pl-pds">&gt;</span></span>
+<span class="pl-k">using</span> <span class="pl-k">namespace</span> <span class="pl-en">std</span><span class="pl-k">;</span>
+<span class="pl-k">const</span> <span class="pl-k">int</span> N = <span class="pl-c1">100010</span>;
+<span class="pl-k">int</span> n;
+<span class="pl-k">int</span> a[N];
+<span class="pl-k">bool</span> <span class="pl-en">check</span> () {
+    <span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">1</span>;i &lt;= n - <span class="pl-c1">1</span>;i++) {
+        <span class="pl-k">if</span> (a[i] &gt; a[i + <span class="pl-c1">1</span>]) <span class="pl-k">return</span> <span class="pl-c1">false</span>;
+    }
+    <span class="pl-k">return</span> <span class="pl-c1">true</span>;
+}
+<span class="pl-k">int</span> <span class="pl-en">main</span> () {
+    cin &gt;&gt; n;
+    <span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">1</span>;i &lt;= n;i++) cin &gt;&gt; a[i];
+    <span class="pl-k">while</span> (!<span class="pl-c1">check</span> ()) <span class="pl-c1">random_shuffle</span> (a + <span class="pl-c1">1</span>,a + <span class="pl-c1">1</span> + n);
+    <span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">1</span>;i &lt;= n;i++) cout &lt;&lt; a[i] &lt;&lt; <span class="pl-s"><span class="pl-pds">'</span> <span class="pl-pds">'</span></span>;
+    <span class="pl-k">return</span> <span class="pl-c1">0</span>;
+}</pre></div>
+<h2>3珠排序</h2>
+<h3>3.1算法流程</h3>
+<p>需要特别硬件</p>
+<h3>3.2代码</h3>
+<p>需要特别硬件</p></div>
+<div style="font-size:small;margin-top:8px;float:right;"></div>
+<button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
+<div class="comments" id="comments"></div>
+</div>
+    <div id="footer">Copyright © <span id="year"></span><a href="https://nickyoung0514.github.io/yblog.github.io"> 任平生-博客 </a>
+<p>
+<span id="runday"></span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a>
+</p>
+
+<script>
+if(""!=""){
+    var now=new Date();
+    var startSite=new Date("");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("year").innerHTML=now.getFullYear();
+    if(""!=""){document.getElementById("runday").innerHTML=" • "+"网站运行"+diffDay+"天"+" • ";}
+    else{document.getElementById("runday").innerHTML="网站运行"+diffDay+"天"+" • ";}
+}
+</script>
+</div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z'};
+var utterancesLoad=0;
+
+let themeSettings={
+    "dark": ["dark","moon","#00f0ff","dark-blue"],
+    "light": ["light","sun","#ff5000","github-light"],
+    "auto": ["auto","sync","","preferred-color-scheme"]
+};
+function changeTheme(mode, icon, color, utheme){
+    document.documentElement.setAttribute("data-color-mode",mode);
+    document.getElementById("themeSwitch").setAttribute("d",value=IconList[icon]);
+    document.getElementById("themeSwitch").parentNode.style.color=color;
+    if(utterancesLoad==1){utterancesTheme(utheme);}
+}
+function modeSwitch(){
+    let currentMode=document.documentElement.getAttribute('data-color-mode');
+    let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
+    localStorage.setItem("meek_theme", newMode);
+    if(themeSettings[newMode]){
+        changeTheme(...themeSettings[newMode]);
+    }
+}
+function utterancesTheme(theme){
+    const message={type:'set-theme',theme: theme};
+    const iframe=document.getElementsByClassName('utterances-frame')[0];
+    iframe.contentWindow.postMessage(message,'https://utteranc.es');
+}
+if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
+console.log("\n %c Gmeek last https://github.com/Meekdai/Gmeek \n\n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
+
+function openComments(){
+    cm=document.getElementById("comments");
+    cmButton=document.getElementById("cmButton");
+    cmButton.innerHTML="loading";
+    span=document.createElement("span");
+    span.setAttribute("class","AnimatedEllipsis");
+    cmButton.appendChild(span);
+
+    script=document.createElement("script");
+    script.setAttribute("src","https://utteranc.es/client.js");
+    script.setAttribute("repo","nickyoung0514/yblog.github.io");
+    script.setAttribute("issue-term","title");
+    
+    if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
+    else if(localStorage.getItem("meek_theme")=="light") {script.setAttribute("theme","github-light");}
+    else{script.setAttribute("theme","preferred-color-scheme");}
+    
+    script.setAttribute("crossorigin","anonymous");
+    script.setAttribute("async","");
+    cm.appendChild(script);
+
+    int=self.setInterval("iFrameLoading()",200);
+}
+
+function iFrameLoading(){
+    var utterances=document.getElementsByClassName('utterances');
+    if(utterances.length==1){
+        if(utterances[0].style.height!=""){
+            utterancesLoad=1;
+            int=window.clearInterval(int);
+            document.getElementById("cmButton").style.display="none";
+            console.log("utterances Load OK");
+        }
+    }
+}
+</script>
+
+
+</html>
