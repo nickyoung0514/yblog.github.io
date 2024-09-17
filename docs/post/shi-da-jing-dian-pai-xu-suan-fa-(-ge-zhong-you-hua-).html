@@ -182,143 +182,144 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <ul>
 <li>一个基于交换的排序。每一轮将序列的最大值放到序列的尾部。</li>
 </ul>
-<div class="highlight highlight-source-c++"><pre class="notranslate">void bubSort(int arr[],int length){//1.冒泡排序
-	while(length--){
-		for(int i=0;i&lt;length;i++){
-			if(arr[i+1]&lt;arr[i]) swap(arr[i],arr[i+1]);
+<div class="highlight highlight-source-c++"><pre class="notranslate"><span class="pl-k">void</span> <span class="pl-en">bubSort</span>(<span class="pl-k">int</span> arr[],<span class="pl-k">int</span> length){<span class="pl-c"><span class="pl-c">//</span>1.冒泡排序</span>
+	<span class="pl-k">while</span>(length--){
+		<span class="pl-k">for</span>(<span class="pl-k">int</span> i=<span class="pl-c1">0</span>;i&lt;length;i++){
+			<span class="pl-k">if</span>(arr[i+<span class="pl-c1">1</span>]&lt;arr[i]) <span class="pl-c1">swap</span>(arr[i],arr[i+<span class="pl-c1">1</span>]);
 		}
 	}
 	
 }
 
-void bubSort1(int arr[],int length){//1.冒泡排序优化
-	int flag=1;
-	while(length-- &amp;&amp; flag){
-		flag=0;
-		for(int i=0;i&lt;length;i++){
-			if(arr[i+1]&lt;arr[i]) {flag=1;swap(arr[i],arr[i+1]);}
+<span class="pl-k">void</span> <span class="pl-en">bubSort1</span>(<span class="pl-k">int</span> arr[],<span class="pl-k">int</span> length){<span class="pl-c"><span class="pl-c">//</span>1.冒泡排序优化</span>
+	<span class="pl-k">int</span> flag=<span class="pl-c1">1</span>;
+	<span class="pl-k">while</span>(length-- &amp;&amp; flag){
+		flag=<span class="pl-c1">0</span>;
+		<span class="pl-k">for</span>(<span class="pl-k">int</span> i=<span class="pl-c1">0</span>;i&lt;length;i++){
+			<span class="pl-k">if</span>(arr[i+<span class="pl-c1">1</span>]&lt;arr[i]) {flag=<span class="pl-c1">1</span>;<span class="pl-c1">swap</span>(arr[i],arr[i+<span class="pl-c1">1</span>]);}
 		}
 	}	
-}</pre></div>
+}
+</pre></div>
 <p>优化有的冒泡排序比优化前的冒泡效率高的原因：<strong>当序列在找到所有最大值之前就已经将序列排好序时，直接结束。</strong></p>
 <h2>选择排序</h2>
 <ul>
 <li>其实选择排序的基本思想还是冒泡排序。<strong>每一轮找到序列中的最小值后和第一个元素进行交换，以此类推。</strong></li>
 </ul>
-<div class="highlight highlight-source-c++"><pre class="notranslate">void selectSort(int arr[],int length){//2.选择排序，演示：6 7 1 5 3 2
-	for(int i=0;i&lt;length;i++){
-		int k=i;//k记录i的位置
-		for(int j=i+1;j&lt;length;j++){//j从假定最小值i后一位开始
-			if(arr[j]&lt;arr[k]) k=j;//更新k的位置
+<div class="highlight highlight-source-c++"><pre class="notranslate"><span class="pl-k">void</span> <span class="pl-en">selectSort</span>(<span class="pl-k">int</span> arr[],<span class="pl-k">int</span> length){<span class="pl-c"><span class="pl-c">//</span>2.选择排序，演示：6 7 1 5 3 2</span>
+	<span class="pl-k">for</span>(<span class="pl-k">int</span> i=<span class="pl-c1">0</span>;i&lt;length;i++){
+		<span class="pl-k">int</span> k=i;<span class="pl-c"><span class="pl-c">//</span>k记录i的位置</span>
+		<span class="pl-k">for</span>(<span class="pl-k">int</span> j=i+<span class="pl-c1">1</span>;j&lt;length;j++){<span class="pl-c"><span class="pl-c">//</span>j从假定最小值i后一位开始</span>
+			<span class="pl-k">if</span>(arr[j]&lt;arr[k]) k=j;<span class="pl-c"><span class="pl-c">//</span>更新k的位置</span>
 		}
-		swap(arr[i],arr[k]);//此轮选定的假定最小值i，和实际最小值k 交换
+		<span class="pl-c1">swap</span>(arr[i],arr[k]);<span class="pl-c"><span class="pl-c">//</span>此轮选定的假定最小值i，和实际最小值k 交换</span>
 	}
 }</pre></div>
 <h2>插入排序</h2>
 <ul>
 <li>优点是：当原始序列已经基本有序时，再将一个新的数据插入进来，比较方便，也比较高效。</li>
 </ul>
-<div class="highlight highlight-source-c++"><pre class="notranslate">void insertSort(int arr[],int length){//3.插入排序，演示：1 2 3 7 6 5 4
-	for(int i=1;i&lt;length;i++){//arr[0]有序 从1开始比较
-		for(int j=i;j&gt;=1&amp;&amp;arr[j]&lt;arr[j-1];j--) swap(arr[j],arr[j-1]);
+<div class="highlight highlight-source-c++"><pre class="notranslate"><span class="pl-k">void</span> <span class="pl-en">insertSort</span>(<span class="pl-k">int</span> arr[],<span class="pl-k">int</span> length){<span class="pl-c"><span class="pl-c">//</span>3.插入排序，演示：1 2 3 7 6 5 4</span>
+	<span class="pl-k">for</span>(<span class="pl-k">int</span> i=<span class="pl-c1">1</span>;i&lt;length;i++){<span class="pl-c"><span class="pl-c">//</span>arr[0]有序 从1开始比较</span>
+		<span class="pl-k">for</span>(<span class="pl-k">int</span> j=i;j&gt;=<span class="pl-c1">1</span>&amp;&amp;arr[j]&lt;arr[j-<span class="pl-c1">1</span>];j--) <span class="pl-c1">swap</span>(arr[j],arr[j-<span class="pl-c1">1</span>]);
 	}
 }</pre></div>
 <h2>希尔排序</h2>
 <p>优化版的插入排序。优化的地方就是步长增大了，原来插入排序的步长是1，而希尔排序的步长可以很大，然后逐渐减小直到1形成插入排序。处理大量数据，希尔排序更占优。</p>
-<div class="highlight highlight-source-c++"><pre class="notranslate">void shellSort(int arr[],int length){
-	int h=4;//初始步长为4
-	while(h&gt;=1){
-		for(int i=h;i&lt;length;i++){//arr[0]有序 从1开始比较
-			for(int j=i;j&gt;=h&amp;&amp;arr[j]&lt;arr[j-h];j-=h) swap(arr[j],arr[j-h]);
+<div class="highlight highlight-source-c++"><pre class="notranslate"><span class="pl-k">void</span> <span class="pl-en">shellSort</span>(<span class="pl-k">int</span> arr[],<span class="pl-k">int</span> length){
+	<span class="pl-k">int</span> h=<span class="pl-c1">4</span>;<span class="pl-c"><span class="pl-c">//</span>初始步长为4</span>
+	<span class="pl-k">while</span>(h&gt;=<span class="pl-c1">1</span>){
+		<span class="pl-k">for</span>(<span class="pl-k">int</span> i=h;i&lt;length;i++){<span class="pl-c"><span class="pl-c">//</span>arr[0]有序 从1开始比较</span>
+			<span class="pl-k">for</span>(<span class="pl-k">int</span> j=i;j&gt;=h&amp;&amp;arr[j]&lt;arr[j-h];j-=h) <span class="pl-c1">swap</span>(arr[j],arr[j-h]);
 		}
-		h/=2;//每次抽样排序后步长除2，直到步长为1
+		h/=<span class="pl-c1">2</span>;<span class="pl-c"><span class="pl-c">//</span>每次抽样排序后步长除2，直到步长为1</span>
 	}
 }</pre></div>
 <p>经典的希尔序列：1,4,13,...,3 * n+1</p>
-<div class="highlight highlight-source-c++"><pre class="notranslate">void shellSort1(int arr[],int length){//4.希尔排序优化
-	int h=1;
-	int t=length/3;
-	while(h&lt;t) h=3*h+1;
-	while(h&gt;=1){
-		for(int i=h;i&lt;length;i++){//arr[0]有序 从1开始比较
-			for(int j=i;j&gt;=h&amp;&amp;arr[j]&lt;arr[j-h];j-=h) swap(arr[j],arr[j-h]);
+<div class="highlight highlight-source-c++"><pre class="notranslate"><span class="pl-k">void</span> <span class="pl-en">shellSort1</span>(<span class="pl-k">int</span> arr[],<span class="pl-k">int</span> length){<span class="pl-c"><span class="pl-c">//</span>4.希尔排序优化</span>
+	<span class="pl-k">int</span> h=<span class="pl-c1">1</span>;
+	<span class="pl-k">int</span> t=length/<span class="pl-c1">3</span>;
+	<span class="pl-k">while</span>(h&lt;t) h=<span class="pl-c1">3</span>*h+<span class="pl-c1">1</span>;
+	<span class="pl-k">while</span>(h&gt;=<span class="pl-c1">1</span>){
+		<span class="pl-k">for</span>(<span class="pl-k">int</span> i=h;i&lt;length;i++){<span class="pl-c"><span class="pl-c">//</span>arr[0]有序 从1开始比较</span>
+			<span class="pl-k">for</span>(<span class="pl-k">int</span> j=i;j&gt;=h&amp;&amp;arr[j]&lt;arr[j-h];j-=h) <span class="pl-c1">swap</span>(arr[j],arr[j-h]);
 		}
-		h/=3;//每次抽样排序后步长除3，直到步长为1
+		h/=<span class="pl-c1">3</span>;<span class="pl-c"><span class="pl-c">//</span>每次抽样排序后步长除3，直到步长为1</span>
 	}
 }</pre></div>
 <h2>快速排序</h2>
 <p>冒泡排序的优化版本。核心思想：使用轴，每一轮左右递归后，把轴放到中间，使得轴的左边都比轴小，轴的右边比轴大。当所有的递归都结束了，就自然排好序了。适合数据杂乱无章的序列。</p>
-<div class="highlight highlight-source-c++"><pre class="notranslate">void quickSort(int arr[],int left,int right){//5.快速排序
-	if(left&gt;=right) return;//只有一个元素时
-	int i=left,j=right;
-	int pivot=arr[i];//轴为左边第一个值
-	while(i&lt;j){//找轴
-		while(i&lt;j &amp;&amp; arr[j]&gt;=pivot) j--;//从右开始，找比轴小的，否则指针j左移
+<div class="highlight highlight-source-c++"><pre class="notranslate"><span class="pl-k">void</span> <span class="pl-en">quickSort</span>(<span class="pl-k">int</span> arr[],<span class="pl-k">int</span> left,<span class="pl-k">int</span> right){<span class="pl-c"><span class="pl-c">//</span>5.快速排序</span>
+	<span class="pl-k">if</span>(left&gt;=right) <span class="pl-k">return</span>;<span class="pl-c"><span class="pl-c">//</span>只有一个元素时</span>
+	<span class="pl-k">int</span> i=left,j=right;
+	<span class="pl-k">int</span> pivot=arr[i];<span class="pl-c"><span class="pl-c">//</span>轴为左边第一个值</span>
+	<span class="pl-k">while</span>(i&lt;j){<span class="pl-c"><span class="pl-c">//</span>找轴</span>
+		<span class="pl-k">while</span>(i&lt;j &amp;&amp; arr[j]&gt;=pivot) j--;<span class="pl-c"><span class="pl-c">//</span>从右开始，找比轴小的，否则指针j左移</span>
 		arr[i]=arr[j];
-		while(i&lt;j &amp;&amp; arr[i]&lt;=pivot) i++;//从左开始，找比轴大的，否则指针i右移
+		<span class="pl-k">while</span>(i&lt;j &amp;&amp; arr[i]&lt;=pivot) i++;<span class="pl-c"><span class="pl-c">//</span>从左开始，找比轴大的，否则指针i右移</span>
 		arr[j]=arr[i];
 	}
-	arr[i]=pivot;//找到轴，放入i位置
-	quickSort(arr,left,i-1);//第i个位置为轴的位置
-	quickSort(arr,i+1,right);
+	arr[i]=pivot;<span class="pl-c"><span class="pl-c">//</span>找到轴，放入i位置</span>
+	<span class="pl-c1">quickSort</span>(arr,left,i-<span class="pl-c1">1</span>);<span class="pl-c"><span class="pl-c">//</span>第i个位置为轴的位置</span>
+	<span class="pl-c1">quickSort</span>(arr,i+<span class="pl-c1">1</span>,right);
 }</pre></div>
-<div class="highlight highlight-source-c++"><pre class="notranslate">void quickSort2(int arr[],int left,int right){
-	if(left&gt;=right) return;
-	int pivot=arr[left];
-	int i=left+1;
-	int j=left+1;
-	while(j&lt;=right){//指针j还没到右边界时
-		if(arr[j]&lt;pivot){swap(arr[i],arr[j]); i++;}
+<div class="highlight highlight-source-c++"><pre class="notranslate"><span class="pl-k">void</span> <span class="pl-en">quickSort2</span>(<span class="pl-k">int</span> arr[],<span class="pl-k">int</span> left,<span class="pl-k">int</span> right){
+	<span class="pl-k">if</span>(left&gt;=right) <span class="pl-k">return</span>;
+	<span class="pl-k">int</span> pivot=arr[left];
+	<span class="pl-k">int</span> i=left+<span class="pl-c1">1</span>;
+	<span class="pl-k">int</span> j=left+<span class="pl-c1">1</span>;
+	<span class="pl-k">while</span>(j&lt;=right){<span class="pl-c"><span class="pl-c">//</span>指针j还没到右边界时</span>
+		<span class="pl-k">if</span>(arr[j]&lt;pivot){<span class="pl-c1">swap</span>(arr[i],arr[j]); i++;}
 		j++;
 	}
-	swap(arr[left],arr[i-1]);
-	quickSort2(arr,left,i-2);
-	quickSort2(arr,i,right);
+	<span class="pl-c1">swap</span>(arr[left],arr[i-<span class="pl-c1">1</span>]);
+	<span class="pl-c1">quickSort2</span>(arr,left,i-<span class="pl-c1">2</span>);
+	<span class="pl-c1">quickSort2</span>(arr,i,right);
 }</pre></div>
 <h2>归并排序</h2>
 <p>基于分而治之的思想。拿两个有序序列合并成一个新的有序序列。</p>
-<div class="highlight highlight-source-c++"><pre class="notranslate">void mergeSort(int a[],int alen,int b[],int blen,int *temp){//6.归并排序
-	int i=0;//左指针
-	int j=0;//右指针
-	int k=0;//新数组的下标
-	while(i&lt;alen &amp;&amp; j&lt;blen){
-		if(a[i]&lt;b[j]){temp[k]=a[i]; k++; i++;}//a[i]小，加入数组，指针后移
-		else { temp[k]=b[j]; k++; j++;}
+<div class="highlight highlight-source-c++"><pre class="notranslate"><span class="pl-k">void</span> <span class="pl-en">mergeSort</span>(<span class="pl-k">int</span> a[],<span class="pl-k">int</span> alen,<span class="pl-k">int</span> b[],<span class="pl-k">int</span> blen,<span class="pl-k">int</span> *temp){<span class="pl-c"><span class="pl-c">//</span>6.归并排序</span>
+	<span class="pl-k">int</span> i=<span class="pl-c1">0</span>;<span class="pl-c"><span class="pl-c">//</span>左指针</span>
+	<span class="pl-k">int</span> j=<span class="pl-c1">0</span>;<span class="pl-c"><span class="pl-c">//</span>右指针</span>
+	<span class="pl-k">int</span> k=<span class="pl-c1">0</span>;<span class="pl-c"><span class="pl-c">//</span>新数组的下标</span>
+	<span class="pl-k">while</span>(i&lt;alen &amp;&amp; j&lt;blen){
+		<span class="pl-k">if</span>(a[i]&lt;b[j]){temp[k]=a[i]; k++; i++;}<span class="pl-c"><span class="pl-c">//</span>a[i]小，加入数组，指针后移</span>
+		<span class="pl-k">else</span> { temp[k]=b[j]; k++; j++;}
 	}
-	while(i&lt;alen){temp[k]=a[i]; k++; i++;}//合并完，后续a[]还有没合并，则合并
-	while(j&lt;blen){temp[k]=b[j]; k++; j++;}//合并完，后续b[]还有没合并，则合并
+	<span class="pl-k">while</span>(i&lt;alen){temp[k]=a[i]; k++; i++;}<span class="pl-c"><span class="pl-c">//</span>合并完，后续a[]还有没合并，则合并</span>
+	<span class="pl-k">while</span>(j&lt;blen){temp[k]=b[j]; k++; j++;}<span class="pl-c"><span class="pl-c">//</span>合并完，后续b[]还有没合并，则合并</span>
 }</pre></div>
-<div class="highlight highlight-source-c++"><pre class="notranslate">void mergeSort2(int a[],int alen,int b[],int blen,int *temp){//6.归并排序优化:两个有序列表合并
-	int i=0;//左指针
-	int j=0;//右指针
-	int k=0;//新数组的下标
-	while(i&lt;alen &amp;&amp; j&lt;blen) temp[k++]=a[i] &lt; b[j] ? a[i++] : b[j++];
-	while(i&lt;alen) temp[k++] = a[i++]; 
-	while(j&lt;blen) temp[k++] = b[j++]; 
+<div class="highlight highlight-source-c++"><pre class="notranslate"><span class="pl-k">void</span> <span class="pl-en">mergeSort2</span>(<span class="pl-k">int</span> a[],<span class="pl-k">int</span> alen,<span class="pl-k">int</span> b[],<span class="pl-k">int</span> blen,<span class="pl-k">int</span> *temp){<span class="pl-c"><span class="pl-c">//</span>6.归并排序优化:两个有序列表合并</span>
+	<span class="pl-k">int</span> i=<span class="pl-c1">0</span>;<span class="pl-c"><span class="pl-c">//</span>左指针</span>
+	<span class="pl-k">int</span> j=<span class="pl-c1">0</span>;<span class="pl-c"><span class="pl-c">//</span>右指针</span>
+	<span class="pl-k">int</span> k=<span class="pl-c1">0</span>;<span class="pl-c"><span class="pl-c">//</span>新数组的下标</span>
+	<span class="pl-k">while</span>(i&lt;alen &amp;&amp; j&lt;blen) temp[k++]=a[i] &lt; b[j] ? a[i++] : b[j++];
+	<span class="pl-k">while</span>(i&lt;alen) temp[k++] = a[i++]; 
+	<span class="pl-k">while</span>(j&lt;blen) temp[k++] = b[j++]; 
 }</pre></div>
-<div class="highlight highlight-source-c++"><pre class="notranslate">void merge(int arr[],int low,int mid,int height,int *temp){//6.归并排序无序版
-	int i=low;
-	int j=mid+1;
-	int k=low;
-	while(i&lt;=mid &amp;&amp; j&lt;=height)	temp[k++]=arr[i]&lt;arr[j]? arr[i++]:arr[j++];
-	while(i&lt;=mid)	 temp[k++]=arr[i++];
-	while(j&lt;=height) temp[k++]=arr[j++];
-	for(i = low; i&lt;=height; i++) arr[i]=temp[i];//将temp[]复制到a[]
+<div class="highlight highlight-source-c++"><pre class="notranslate"><span class="pl-k">void</span> <span class="pl-en">merge</span>(<span class="pl-k">int</span> arr[],<span class="pl-k">int</span> low,<span class="pl-k">int</span> mid,<span class="pl-k">int</span> height,<span class="pl-k">int</span> *temp){<span class="pl-c"><span class="pl-c">//</span>6.归并排序无序版</span>
+	<span class="pl-k">int</span> i=low;
+	<span class="pl-k">int</span> j=mid+<span class="pl-c1">1</span>;
+	<span class="pl-k">int</span> k=low;
+	<span class="pl-k">while</span>(i&lt;=mid &amp;&amp; j&lt;=height)	temp[k++]=arr[i]&lt;arr[j]? arr[i++]:arr[j++];
+	<span class="pl-k">while</span>(i&lt;=mid)	 temp[k++]=arr[i++];
+	<span class="pl-k">while</span>(j&lt;=height) temp[k++]=arr[j++];
+	<span class="pl-k">for</span>(i = low; i&lt;=height; i++) arr[i]=temp[i];<span class="pl-c"><span class="pl-c">//</span>将temp[]复制到a[]</span>
 }
 
-void merge_sort(int arr[],int low,int height,int *temp){
-	if(low&gt;=height) return;
-	int mid=low+(height-low)/2; //(low+height)/2
-	merge_sort(arr,low,mid,temp);
-	merge_sort(arr,mid+1,height,temp);
-	merge(arr,low,mid,height,temp);
+<span class="pl-k">void</span> <span class="pl-en">merge_sort</span>(<span class="pl-k">int</span> arr[],<span class="pl-k">int</span> low,<span class="pl-k">int</span> height,<span class="pl-k">int</span> *temp){
+	<span class="pl-k">if</span>(low&gt;=height) <span class="pl-k">return</span>;
+	<span class="pl-k">int</span> mid=low+(height-low)/<span class="pl-c1">2</span>; <span class="pl-c"><span class="pl-c">//</span>(low+height)/2</span>
+	<span class="pl-c1">merge_sort</span>(arr,low,mid,temp);
+	<span class="pl-c1">merge_sort</span>(arr,mid+<span class="pl-c1">1</span>,height,temp);
+	<span class="pl-c1">merge</span>(arr,low,mid,height,temp);
 }
 
-void mergeSort3(int arr[],int length){
-	int *temp =(int *)malloc(sizeof(int)*length);
-//	assert(temp);//断点处理
-	merge_sort(arr,0,length-1,temp);
-	free(temp);
+<span class="pl-k">void</span> <span class="pl-en">mergeSort3</span>(<span class="pl-k">int</span> arr[],<span class="pl-k">int</span> length){
+	<span class="pl-k">int</span> *temp =(<span class="pl-k">int</span> *)<span class="pl-c1">malloc</span>(<span class="pl-k">sizeof</span>(<span class="pl-k">int</span>)*length);
+<span class="pl-c"><span class="pl-c">//</span>	assert(temp);//断点处理</span>
+	<span class="pl-c1">merge_sort</span>(arr,<span class="pl-c1">0</span>,length-<span class="pl-c1">1</span>,temp);
+	<span class="pl-c1">free</span>(temp);
 }</pre></div>
 <h2>堆排序</h2>
 <p>去构建推结构的时候，有外堆和内堆。</p>
@@ -359,104 +360,105 @@ void mergeSort3(int arr[],int length){
 <p>外堆实现</p>
 </li>
 </ul>
-<div class="highlight highlight-source-c++"><pre class="notranslate">typedef struct Heap{//7.堆排序：堆结构
-	int* root;
-	int length;
+<div class="highlight highlight-source-c++"><pre class="notranslate"><span class="pl-k">typedef</span> <span class="pl-k">struct</span> <span class="pl-en">Heap</span>{<span class="pl-c"><span class="pl-c">//</span>7.堆排序：堆结构</span>
+	<span class="pl-k">int</span>* root;
+	<span class="pl-k">int</span> length;
 }Heap;
 
-Heap* CreateHeap(int length){//7.堆排序：申请堆结构（外堆）
-	Heap* heap=(Heap *)malloc(sizeof(Heap));
-	heap-&gt;length=0;
-	heap-&gt;root = (int *)malloc(sizeof(int) * length);
-	return heap;
+Heap* <span class="pl-en">CreateHeap</span>(<span class="pl-k">int</span> length){<span class="pl-c"><span class="pl-c">//</span>7.堆排序：申请堆结构（外堆）</span>
+	Heap* heap=(Heap *)<span class="pl-c1">malloc</span>(<span class="pl-k">sizeof</span>(Heap));
+	heap-&gt;<span class="pl-smi">length</span>=<span class="pl-c1">0</span>;
+	heap-&gt;<span class="pl-smi">root</span> = (<span class="pl-k">int</span> *)<span class="pl-c1">malloc</span>(<span class="pl-k">sizeof</span>(<span class="pl-k">int</span>) * length);
+	<span class="pl-k">return</span> heap;
 }
 
-void pushHeap(Heap* heap , int data){//7.堆排序：入堆（外堆）
-	int current = heap-&gt;length++;//当前的下标++
-	int parent = current / 2;//当前下标的父亲结点下标
-	heap-&gt;root[current]=data;
-	while(parent!=current){
-		if(heap-&gt;root[current] &lt; heap-&gt;root[parent]){//如果当前结点值比父亲值小，就交换
-			swap(heap-&gt;root[current] , heap-&gt;root[parent]);
+<span class="pl-k">void</span> <span class="pl-en">pushHeap</span>(Heap* heap , <span class="pl-k">int</span> data){<span class="pl-c"><span class="pl-c">//</span>7.堆排序：入堆（外堆）</span>
+	<span class="pl-k">int</span> current = heap-&gt;<span class="pl-smi">length</span>++;<span class="pl-c"><span class="pl-c">//</span>当前的下标++</span>
+	<span class="pl-k">int</span> parent = current / <span class="pl-c1">2</span>;<span class="pl-c"><span class="pl-c">//</span>当前下标的父亲结点下标</span>
+	heap-&gt;<span class="pl-smi">root</span>[current]=data;
+	<span class="pl-k">while</span>(parent!=current){
+		<span class="pl-k">if</span>(heap-&gt;<span class="pl-smi">root</span>[current] &lt; heap-&gt;<span class="pl-smi">root</span>[parent]){<span class="pl-c"><span class="pl-c">//</span>如果当前结点值比父亲值小，就交换</span>
+			<span class="pl-c1">swap</span>(heap-&gt;<span class="pl-smi">root</span>[current] , heap-&gt;<span class="pl-smi">root</span>[parent]);
 			current=parent;
-			parent = current/2;
-		}else break;
+			parent = current/<span class="pl-c1">2</span>;
+		}<span class="pl-k">else</span> <span class="pl-k">break</span>;
 	}
 }
 
-int popHeap(Heap* heap){//7.堆排序：出堆（外堆）
-	int val=heap-&gt;root[0];//堆顶位置
-	int current =0;
-	int rchild = 2 * current + 2;
-	int small;
-	heap-&gt;root[0] = heap-&gt;root[--heap-&gt;length];//根节点被覆盖
-	while(rchild &lt;= heap-&gt;length){
-		small=heap-&gt;root[rchild-1] &lt; heap-&gt;root[rchild]? rchild-1 : rchild;//左右子树谁小取谁
-		if(heap-&gt;root[small]&lt;heap-&gt;root[current]){
-			swap(heap-&gt;root[small] , heap-&gt;root[current]);
+<span class="pl-k">int</span> <span class="pl-en">popHeap</span>(Heap* heap){<span class="pl-c"><span class="pl-c">//</span>7.堆排序：出堆（外堆）</span>
+	<span class="pl-k">int</span> val=heap-&gt;<span class="pl-smi">root</span>[<span class="pl-c1">0</span>];<span class="pl-c"><span class="pl-c">//</span>堆顶位置</span>
+	<span class="pl-k">int</span> current =<span class="pl-c1">0</span>;
+	<span class="pl-k">int</span> rchild = <span class="pl-c1">2</span> * current + <span class="pl-c1">2</span>;
+	<span class="pl-k">int</span> small;
+	heap-&gt;<span class="pl-smi">root</span>[<span class="pl-c1">0</span>] = heap-&gt;<span class="pl-smi">root</span>[--heap-&gt;<span class="pl-smi">length</span>];<span class="pl-c"><span class="pl-c">//</span>根节点被覆盖</span>
+	<span class="pl-k">while</span>(rchild &lt;= heap-&gt;<span class="pl-smi">length</span>){
+		small=heap-&gt;<span class="pl-smi">root</span>[rchild-<span class="pl-c1">1</span>] &lt; heap-&gt;<span class="pl-smi">root</span>[rchild]? rchild-<span class="pl-c1">1</span> : rchild;<span class="pl-c"><span class="pl-c">//</span>左右子树谁小取谁</span>
+		<span class="pl-k">if</span>(heap-&gt;<span class="pl-smi">root</span>[small]&lt;heap-&gt;<span class="pl-smi">root</span>[current]){
+			<span class="pl-c1">swap</span>(heap-&gt;<span class="pl-smi">root</span>[small] , heap-&gt;<span class="pl-smi">root</span>[current]);
 			current = small;
-			rchild = 2 * current+2;
-		}else break;
+			rchild = <span class="pl-c1">2</span> * current+<span class="pl-c1">2</span>;
+		}<span class="pl-k">else</span> <span class="pl-k">break</span>;
 	}
-	return val;
+	<span class="pl-k">return</span> val;
 }
-/*伪代码
-arr[MXSIZE];
-for(arr){
-pushHeap(heap,arr[i])
-}
-for(arr){
-arr[i]=popHeap(heap)
-}
-*/
+<span class="pl-c"><span class="pl-c">/*</span>伪代码</span>
+<span class="pl-c">arr[MXSIZE];</span>
+<span class="pl-c">for(arr){</span>
+<span class="pl-c">pushHeap(heap,arr[i])</span>
+<span class="pl-c">}</span>
+<span class="pl-c">for(arr){</span>
+<span class="pl-c">arr[i]=popHeap(heap)</span>
+<span class="pl-c">}</span>
+<span class="pl-c"><span class="pl-c">*/</span></span>
 
-void heapSort(int arr[],int length){//7.堆排序（外堆）
-	Heap* heap=CreateHeap(MAXSIZE);
-	for(int i=0;i&lt;MAXSIZE;i++)	pushHeap(heap,arr[i]);
-	for(int i=0;i&lt;MAXSIZE;i++)	arr[i]=popHeap(heap);
-	free(heap-&gt;root);
-}</pre></div>
+<span class="pl-k">void</span> <span class="pl-en">heapSort</span>(<span class="pl-k">int</span> arr[],<span class="pl-k">int</span> length){<span class="pl-c"><span class="pl-c">//</span>7.堆排序（外堆）</span>
+	Heap* heap=<span class="pl-c1">CreateHeap</span>(MAXSIZE);
+	<span class="pl-k">for</span>(<span class="pl-k">int</span> i=<span class="pl-c1">0</span>;i&lt;MAXSIZE;i++)	<span class="pl-c1">pushHeap</span>(heap,arr[i]);
+	<span class="pl-k">for</span>(<span class="pl-k">int</span> i=<span class="pl-c1">0</span>;i&lt;MAXSIZE;i++)	arr[i]=<span class="pl-c1">popHeap</span>(heap);
+	<span class="pl-c1">free</span>(heap-&gt;<span class="pl-smi">root</span>);
+}
+</pre></div>
 <ul>
 <li>内堆实现</li>
 </ul>
-<div class="highlight highlight-source-c++"><pre class="notranslate">//不需要申请空间
+<div class="highlight highlight-source-c++"><pre class="notranslate"><span class="pl-c"><span class="pl-c">//</span>不需要申请空间</span>
 
-void Heapify(int arr[],int length,int current){//7.堆排序（内堆）
-	int rchild=2*current+2;
-	int large;
-	while(rchild&lt;=length){
-		//
-		large=rchild==length?rchild-1 : (arr[rchild-1]&gt;arr[rchild]? rchild-1:rchild);//左右子树谁大，拿谁
-		if(arr[large]&gt;arr[current]){
-			swap(arr[large],arr[current]);
+<span class="pl-k">void</span> <span class="pl-en">Heapify</span>(<span class="pl-k">int</span> arr[],<span class="pl-k">int</span> length,<span class="pl-k">int</span> current){<span class="pl-c"><span class="pl-c">//</span>7.堆排序（内堆）</span>
+	<span class="pl-k">int</span> rchild=<span class="pl-c1">2</span>*current+<span class="pl-c1">2</span>;
+	<span class="pl-k">int</span> large;
+	<span class="pl-k">while</span>(rchild&lt;=length){
+		<span class="pl-c"><span class="pl-c">//</span></span>
+		large=rchild==length?rchild-<span class="pl-c1">1</span> : (arr[rchild-<span class="pl-c1">1</span>]&gt;arr[rchild]? rchild-<span class="pl-c1">1</span>:rchild);<span class="pl-c"><span class="pl-c">//</span>左右子树谁大，拿谁</span>
+		<span class="pl-k">if</span>(arr[large]&gt;arr[current]){
+			<span class="pl-c1">swap</span>(arr[large],arr[current]);
 			current = large;
-			rchild = 2 * current+2;
-		}else break;
+			rchild = <span class="pl-c1">2</span> * current+<span class="pl-c1">2</span>;
+		}<span class="pl-k">else</span> <span class="pl-k">break</span>;
 	}
 }
 
 
 
-void heapSort2(int arr[],int length){//7.堆排序（内堆）
-	int current = length/2;//取堆的尾点
-	while(current&gt;=0){
-		Heapify(arr,length,current);
+<span class="pl-k">void</span> <span class="pl-en">heapSort2</span>(<span class="pl-k">int</span> arr[],<span class="pl-k">int</span> length){<span class="pl-c"><span class="pl-c">//</span>7.堆排序（内堆）</span>
+	<span class="pl-k">int</span> current = length/<span class="pl-c1">2</span>;<span class="pl-c"><span class="pl-c">//</span>取堆的尾点</span>
+	<span class="pl-k">while</span>(current&gt;=<span class="pl-c1">0</span>){
+		<span class="pl-c1">Heapify</span>(arr,length,current);
 		current--;
 	}
-	while(length){
-		swap(arr[0],arr[--length]);
-		Heapify(arr,length,0);
+	<span class="pl-k">while</span>(length){
+		<span class="pl-c1">swap</span>(arr[<span class="pl-c1">0</span>],arr[--length]);
+		<span class="pl-c1">Heapify</span>(arr,length,<span class="pl-c1">0</span>);
 		
 	}
 }</pre></div>
 <h2>计数排序</h2>
 <p>算法思想：统计原来数组的数据。大部分数据在一定范围内，而且重复很多，将数据转换成下标存储于一个临时空间中，然后变量临时空间把对应下标值放回原数组，当遍历临时空间完成后，原来的数组就是排好序了。</p>
-<div class="highlight highlight-source-c++"><pre class="notranslate">#define N 100 
-int temp[N];
-void countSort(int arr[],int length){//9.计数排序
-	for(int i=0;i&lt;length;i++)	temp[arr[i]]++;
-	for(int i=0,j=0;i&lt;N;i++){
-		while(temp[i]--)arr[j++]=i;
+<div class="highlight highlight-source-c++"><pre class="notranslate">#<span class="pl-k">define</span> <span class="pl-en">N</span> <span class="pl-c1">100</span> 
+<span class="pl-k">int</span> temp[N];
+<span class="pl-k">void</span> <span class="pl-en">countSort</span>(<span class="pl-k">int</span> arr[],<span class="pl-k">int</span> length){<span class="pl-c"><span class="pl-c">//</span>9.计数排序</span>
+	<span class="pl-k">for</span>(<span class="pl-k">int</span> i=<span class="pl-c1">0</span>;i&lt;length;i++)	temp[arr[i]]++;
+	<span class="pl-k">for</span>(<span class="pl-k">int</span> i=<span class="pl-c1">0</span>,j=<span class="pl-c1">0</span>;i&lt;N;i++){
+		<span class="pl-k">while</span>(temp[i]--)arr[j++]=i;
 	}
 }</pre></div>
 <h2>基数排序</h2>
@@ -464,381 +466,382 @@ void countSort(int arr[],int length){//9.计数排序
 第一轮($10^0$位):640 251 92 423 154 365 78<br>
 第二轮($10^1$位):423 640 251 154 365 78 92<br>
 第三轮($10^2$位):78 92 154 251 365 423 640</p>
-<div class="highlight highlight-source-c++"><pre class="notranslate">int Temp[10][N];
-void redixSort(int arr[],int length){//10.基数排序
-	int i,j,pos;
-	for(int k=10;k&lt;10000;k*=10){
-		for(i=0;i&lt;length;i++){
-			j=0;
-			pos=(arr[i]%k) / (k/10);
-			while(Temp[pos][j])j++;
+<div class="highlight highlight-source-c++"><pre class="notranslate"><span class="pl-k">int</span> Temp[<span class="pl-c1">10</span>][N];
+<span class="pl-k">void</span> <span class="pl-en">redixSort</span>(<span class="pl-k">int</span> arr[],<span class="pl-k">int</span> length){<span class="pl-c"><span class="pl-c">//</span>10.基数排序</span>
+	<span class="pl-k">int</span> i,j,pos;
+	<span class="pl-k">for</span>(<span class="pl-k">int</span> k=<span class="pl-c1">10</span>;k&lt;<span class="pl-c1">10000</span>;k*=<span class="pl-c1">10</span>){
+		<span class="pl-k">for</span>(i=<span class="pl-c1">0</span>;i&lt;length;i++){
+			j=<span class="pl-c1">0</span>;
+			pos=(arr[i]%k) / (k/<span class="pl-c1">10</span>);
+			<span class="pl-k">while</span>(Temp[pos][j])j++;
 			Temp[pos][j]=arr[i];
 		}
-		pos=0;
-		for(int i=0;i&lt;10;i++){
-			for(int j=0;j&lt;length &amp;&amp; Temp[i][j]!=0;j++){
+		pos=<span class="pl-c1">0</span>;
+		<span class="pl-k">for</span>(<span class="pl-k">int</span> i=<span class="pl-c1">0</span>;i&lt;<span class="pl-c1">10</span>;i++){
+			<span class="pl-k">for</span>(<span class="pl-k">int</span> j=<span class="pl-c1">0</span>;j&lt;length &amp;&amp; Temp[i][j]!=<span class="pl-c1">0</span>;j++){
 				arr[pos++]=Temp[i][j];
-				Temp[i][j]=0;
-			}
-		}
-	}
-}</pre></div>
-<div class="highlight highlight-source-c++"><pre class="notranslate">#include&lt;bits/stdc++.h&gt;
-#include&lt;assert.h&gt;
-#include&lt;climits&gt;
-<span class="pl-k">using</span> <span class="pl-k">namespace</span> std;
-#define MAXSIZE 10
-#define N 100
-
-
-
-
-void initArr(int arr[], int length) { //数组初始化函数
-	for (int i = 0; i &lt; length; i++) {
-		arr[i] = rand() % (MAXSIZE * 10);
-	}
-}
-void showArr(int arr[], int length) { //数组打印函数
-	for (int i = 0; i &lt; length; i++) {
-		printf("%d ", arr[i]);
-	}
-	printf("\n----------------------------------------------------\n");
-}
-
-void bubSort(int arr[], int length) { //1.冒泡排序
-	while (length--) {
-		for (int i = 0; i &lt; length; i++) {
-			if (arr[i + 1] &lt; arr[i]) swap(arr[i], arr[i + 1]);
-		}
-	}
-
-}
-
-void bubSort1(int arr[], int length) { //1.冒泡排序优化
-	int flag = 1;
-	while (length-- &amp;&amp; flag) {
-		flag = 0;
-		for (int i = 0; i &lt; length; i++) {
-			if (arr[i + 1] &lt; arr[i]) {
-				flag = 1;
-				swap(arr[i], arr[i + 1]);
+				Temp[i][j]=<span class="pl-c1">0</span>;
 			}
 		}
 	}
 }
+</pre></div>
+<div class="highlight highlight-source-c++"><pre class="notranslate">#<span class="pl-k">include</span><span class="pl-s"><span class="pl-pds">&lt;</span>bits/stdc++.h<span class="pl-pds">&gt;</span></span>
+#<span class="pl-k">include</span><span class="pl-s"><span class="pl-pds">&lt;</span>assert.h<span class="pl-pds">&gt;</span></span>
+#<span class="pl-k">include</span><span class="pl-s"><span class="pl-pds">&lt;</span>climits<span class="pl-pds">&gt;</span></span>
+<span class="pl-k">using</span> <span class="pl-k">namespace</span> <span class="pl-en">std</span><span class="pl-k">;</span>
+#<span class="pl-k">define</span> <span class="pl-en">MAXSIZE</span> <span class="pl-c1">10</span>
+#<span class="pl-k">define</span> <span class="pl-en">N</span> <span class="pl-c1">100</span>
 
-void selectSort(int arr[], int length) { //2.选择排序，演示：6 7 1 5 3 2
-	for (int i = 0; i &lt; length; i++) {
-		int k = i; //k记录i的位置
-		for (int j = i + 1; j &lt; length; j++) { //j从假定最小值i后一位开始
-			if (arr[j] &lt; arr[k]) k = j; //更新k的位置
+
+
+
+<span class="pl-k">void</span> <span class="pl-en">initArr</span>(<span class="pl-k">int</span> arr[], <span class="pl-k">int</span> length) { <span class="pl-c"><span class="pl-c">//</span>数组初始化函数</span>
+	<span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">0</span>; i &lt; length; i++) {
+		arr[i] = <span class="pl-c1">rand</span>() % (MAXSIZE * <span class="pl-c1">10</span>);
+	}
+}
+<span class="pl-k">void</span> <span class="pl-en">showArr</span>(<span class="pl-k">int</span> arr[], <span class="pl-k">int</span> length) { <span class="pl-c"><span class="pl-c">//</span>数组打印函数</span>
+	<span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">0</span>; i &lt; length; i++) {
+		<span class="pl-c1">printf</span>(<span class="pl-s"><span class="pl-pds">"</span>%d <span class="pl-pds">"</span></span>, arr[i]);
+	}
+	<span class="pl-c1">printf</span>(<span class="pl-s"><span class="pl-pds">"</span><span class="pl-cce">\n</span>----------------------------------------------------<span class="pl-cce">\n</span><span class="pl-pds">"</span></span>);
+}
+
+<span class="pl-k">void</span> <span class="pl-en">bubSort</span>(<span class="pl-k">int</span> arr[], <span class="pl-k">int</span> length) { <span class="pl-c"><span class="pl-c">//</span>1.冒泡排序</span>
+	<span class="pl-k">while</span> (length--) {
+		<span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">0</span>; i &lt; length; i++) {
+			<span class="pl-k">if</span> (arr[i + <span class="pl-c1">1</span>] &lt; arr[i]) <span class="pl-c1">swap</span>(arr[i], arr[i + <span class="pl-c1">1</span>]);
 		}
-		swap(arr[i], arr[k]); //此轮选定的假定最小值i，和实际最小值k 交换
 	}
+
 }
 
-void insertSort(int arr[], int length) { //3.插入排序，演示：1 2 3 7 6 5 4
-	for (int i = 1; i &lt; length; i++) { //arr[0]有序 从1开始比较
-		for (int j = i; j &gt;= 1 &amp;&amp; arr[j] &lt; arr[j - 1]; j--) swap(arr[j], arr[j - 1]);
-	}
-}
-
-void shellSort(int arr[], int length) { //4.希尔排序
-	int h = 4; //初始步长为4
-	while (h &gt;= 1) {
-		for (int i = h; i &lt; length; i++) { //arr[0]有序 从1开始比较
-			for (int j = i; j &gt;= h &amp;&amp; arr[j] &lt; arr[j - h]; j -= h) swap(arr[j], arr[j - h]);
+<span class="pl-k">void</span> <span class="pl-en">bubSort1</span>(<span class="pl-k">int</span> arr[], <span class="pl-k">int</span> length) { <span class="pl-c"><span class="pl-c">//</span>1.冒泡排序优化</span>
+	<span class="pl-k">int</span> flag = <span class="pl-c1">1</span>;
+	<span class="pl-k">while</span> (length-- &amp;&amp; flag) {
+		flag = <span class="pl-c1">0</span>;
+		<span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">0</span>; i &lt; length; i++) {
+			<span class="pl-k">if</span> (arr[i + <span class="pl-c1">1</span>] &lt; arr[i]) {
+				flag = <span class="pl-c1">1</span>;
+				<span class="pl-c1">swap</span>(arr[i], arr[i + <span class="pl-c1">1</span>]);
+			}
 		}
-		h /= 2; //每次抽样排序后步长除2，直到步长为1
 	}
 }
 
-void shellSort1(int arr[], int length) { //4.希尔排序优化
-	int h = 1;
-	int t = length / 3;
-	while (h &lt; t) h = 3 * h + 1;
-	while (h &gt;= 1) {
-		for (int i = h; i &lt; length; i++) { //arr[0]有序 从1开始比较
-			for (int j = i; j &gt;= h &amp;&amp; arr[j] &lt; arr[j - h]; j -= h) swap(arr[j], arr[j - h]);
+<span class="pl-k">void</span> <span class="pl-en">selectSort</span>(<span class="pl-k">int</span> arr[], <span class="pl-k">int</span> length) { <span class="pl-c"><span class="pl-c">//</span>2.选择排序，演示：6 7 1 5 3 2</span>
+	<span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">0</span>; i &lt; length; i++) {
+		<span class="pl-k">int</span> k = i; <span class="pl-c"><span class="pl-c">//</span>k记录i的位置</span>
+		<span class="pl-k">for</span> (<span class="pl-k">int</span> j = i + <span class="pl-c1">1</span>; j &lt; length; j++) { <span class="pl-c"><span class="pl-c">//</span>j从假定最小值i后一位开始</span>
+			<span class="pl-k">if</span> (arr[j] &lt; arr[k]) k = j; <span class="pl-c"><span class="pl-c">//</span>更新k的位置</span>
 		}
-		h /= 3; //每次抽样排序后步长除3，直到步长为1
+		<span class="pl-c1">swap</span>(arr[i], arr[k]); <span class="pl-c"><span class="pl-c">//</span>此轮选定的假定最小值i，和实际最小值k 交换</span>
 	}
 }
 
-void quickSort(int arr[], int left, int right) { //5.快速排序
-	if (left &gt;= right) return; //只有一个元素时
-	int i = left, j = right;
-	int pivot = arr[i]; //轴为左边第一个值
-	while (i &lt; j) { //找轴
-		while (i &lt; j &amp;&amp; arr[j] &gt;= pivot) j--; //从右开始，找比轴小的，否则指针j左移
+<span class="pl-k">void</span> <span class="pl-en">insertSort</span>(<span class="pl-k">int</span> arr[], <span class="pl-k">int</span> length) { <span class="pl-c"><span class="pl-c">//</span>3.插入排序，演示：1 2 3 7 6 5 4</span>
+	<span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">1</span>; i &lt; length; i++) { <span class="pl-c"><span class="pl-c">//</span>arr[0]有序 从1开始比较</span>
+		<span class="pl-k">for</span> (<span class="pl-k">int</span> j = i; j &gt;= <span class="pl-c1">1</span> &amp;&amp; arr[j] &lt; arr[j - <span class="pl-c1">1</span>]; j--) <span class="pl-c1">swap</span>(arr[j], arr[j - <span class="pl-c1">1</span>]);
+	}
+}
+
+<span class="pl-k">void</span> <span class="pl-en">shellSort</span>(<span class="pl-k">int</span> arr[], <span class="pl-k">int</span> length) { <span class="pl-c"><span class="pl-c">//</span>4.希尔排序</span>
+	<span class="pl-k">int</span> h = <span class="pl-c1">4</span>; <span class="pl-c"><span class="pl-c">//</span>初始步长为4</span>
+	<span class="pl-k">while</span> (h &gt;= <span class="pl-c1">1</span>) {
+		<span class="pl-k">for</span> (<span class="pl-k">int</span> i = h; i &lt; length; i++) { <span class="pl-c"><span class="pl-c">//</span>arr[0]有序 从1开始比较</span>
+			<span class="pl-k">for</span> (<span class="pl-k">int</span> j = i; j &gt;= h &amp;&amp; arr[j] &lt; arr[j - h]; j -= h) <span class="pl-c1">swap</span>(arr[j], arr[j - h]);
+		}
+		h /= <span class="pl-c1">2</span>; <span class="pl-c"><span class="pl-c">//</span>每次抽样排序后步长除2，直到步长为1</span>
+	}
+}
+
+<span class="pl-k">void</span> <span class="pl-en">shellSort1</span>(<span class="pl-k">int</span> arr[], <span class="pl-k">int</span> length) { <span class="pl-c"><span class="pl-c">//</span>4.希尔排序优化</span>
+	<span class="pl-k">int</span> h = <span class="pl-c1">1</span>;
+	<span class="pl-k">int</span> t = length / <span class="pl-c1">3</span>;
+	<span class="pl-k">while</span> (h &lt; t) h = <span class="pl-c1">3</span> * h + <span class="pl-c1">1</span>;
+	<span class="pl-k">while</span> (h &gt;= <span class="pl-c1">1</span>) {
+		<span class="pl-k">for</span> (<span class="pl-k">int</span> i = h; i &lt; length; i++) { <span class="pl-c"><span class="pl-c">//</span>arr[0]有序 从1开始比较</span>
+			<span class="pl-k">for</span> (<span class="pl-k">int</span> j = i; j &gt;= h &amp;&amp; arr[j] &lt; arr[j - h]; j -= h) <span class="pl-c1">swap</span>(arr[j], arr[j - h]);
+		}
+		h /= <span class="pl-c1">3</span>; <span class="pl-c"><span class="pl-c">//</span>每次抽样排序后步长除3，直到步长为1</span>
+	}
+}
+
+<span class="pl-k">void</span> <span class="pl-en">quickSort</span>(<span class="pl-k">int</span> arr[], <span class="pl-k">int</span> left, <span class="pl-k">int</span> right) { <span class="pl-c"><span class="pl-c">//</span>5.快速排序</span>
+	<span class="pl-k">if</span> (left &gt;= right) <span class="pl-k">return</span>; <span class="pl-c"><span class="pl-c">//</span>只有一个元素时</span>
+	<span class="pl-k">int</span> i = left, j = right;
+	<span class="pl-k">int</span> pivot = arr[i]; <span class="pl-c"><span class="pl-c">//</span>轴为左边第一个值</span>
+	<span class="pl-k">while</span> (i &lt; j) { <span class="pl-c"><span class="pl-c">//</span>找轴</span>
+		<span class="pl-k">while</span> (i &lt; j &amp;&amp; arr[j] &gt;= pivot) j--; <span class="pl-c"><span class="pl-c">//</span>从右开始，找比轴小的，否则指针j左移</span>
 		arr[i] = arr[j];
-		while (i &lt; j &amp;&amp; arr[i] &lt;= pivot) i++; //从左开始，找比轴大的，否则指针i右移
+		<span class="pl-k">while</span> (i &lt; j &amp;&amp; arr[i] &lt;= pivot) i++; <span class="pl-c"><span class="pl-c">//</span>从左开始，找比轴大的，否则指针i右移</span>
 		arr[j] = arr[i];
 	}
-	arr[i] = pivot; //找到轴，放入i位置
-	quickSort(arr, left, i - 1); //第i个位置为轴的位置
-	quickSort(arr, i + 1, right);
+	arr[i] = pivot; <span class="pl-c"><span class="pl-c">//</span>找到轴，放入i位置</span>
+	<span class="pl-c1">quickSort</span>(arr, left, i - <span class="pl-c1">1</span>); <span class="pl-c"><span class="pl-c">//</span>第i个位置为轴的位置</span>
+	<span class="pl-c1">quickSort</span>(arr, i + <span class="pl-c1">1</span>, right);
 }
 
-void quickSort2(int arr[], int left, int right) { //5.快速排序优化
-	if (left &gt;= right) return;
-	int pivot = arr[left];
-	int i = left + 1;
-	int j = left + 1;
-	while (j &lt;= right) { //指针j还没到右边界时
-		if (arr[j] &lt; pivot) {
-			swap(arr[i], arr[j]);
+<span class="pl-k">void</span> <span class="pl-en">quickSort2</span>(<span class="pl-k">int</span> arr[], <span class="pl-k">int</span> left, <span class="pl-k">int</span> right) { <span class="pl-c"><span class="pl-c">//</span>5.快速排序优化</span>
+	<span class="pl-k">if</span> (left &gt;= right) <span class="pl-k">return</span>;
+	<span class="pl-k">int</span> pivot = arr[left];
+	<span class="pl-k">int</span> i = left + <span class="pl-c1">1</span>;
+	<span class="pl-k">int</span> j = left + <span class="pl-c1">1</span>;
+	<span class="pl-k">while</span> (j &lt;= right) { <span class="pl-c"><span class="pl-c">//</span>指针j还没到右边界时</span>
+		<span class="pl-k">if</span> (arr[j] &lt; pivot) {
+			<span class="pl-c1">swap</span>(arr[i], arr[j]);
 			i++;
 		}
 		j++;
 	}
-	swap(arr[left], arr[i - 1]);
-	quickSort2(arr, left, i - 2);
-	quickSort2(arr, i, right);
+	<span class="pl-c1">swap</span>(arr[left], arr[i - <span class="pl-c1">1</span>]);
+	<span class="pl-c1">quickSort2</span>(arr, left, i - <span class="pl-c1">2</span>);
+	<span class="pl-c1">quickSort2</span>(arr, i, right);
 }
 
-void mergeSort1(int a[], int alen, int b[], int blen, int *temp) { //6.归并排序:两个有序列表合并
-	int i = 0; //左指针
-	int j = 0; //右指针
-	int k = 0; //新数组的下标
-	while (i &lt; alen &amp;&amp; j &lt; blen) {
-		if (a[i] &lt; b[j]) {
-			temp[k] = a[i];    //a[i]小，加入数组，指针后移
+<span class="pl-k">void</span> <span class="pl-en">mergeSort1</span>(<span class="pl-k">int</span> a[], <span class="pl-k">int</span> alen, <span class="pl-k">int</span> b[], <span class="pl-k">int</span> blen, <span class="pl-k">int</span> *temp) { <span class="pl-c"><span class="pl-c">//</span>6.归并排序:两个有序列表合并</span>
+	<span class="pl-k">int</span> i = <span class="pl-c1">0</span>; <span class="pl-c"><span class="pl-c">//</span>左指针</span>
+	<span class="pl-k">int</span> j = <span class="pl-c1">0</span>; <span class="pl-c"><span class="pl-c">//</span>右指针</span>
+	<span class="pl-k">int</span> k = <span class="pl-c1">0</span>; <span class="pl-c"><span class="pl-c">//</span>新数组的下标</span>
+	<span class="pl-k">while</span> (i &lt; alen &amp;&amp; j &lt; blen) {
+		<span class="pl-k">if</span> (a[i] &lt; b[j]) {
+			temp[k] = a[i];    <span class="pl-c"><span class="pl-c">//</span>a[i]小，加入数组，指针后移</span>
 			k++;
 			i++;
-		} else {
+		} <span class="pl-k">else</span> {
 			temp[k] = b[j];
 			k++;
 			j++;
 		}
 	}
-	while (i &lt; alen) {
-		temp[k] = a[i];    //合并完，后续a[]还有没合并，则合并
+	<span class="pl-k">while</span> (i &lt; alen) {
+		temp[k] = a[i];    <span class="pl-c"><span class="pl-c">//</span>合并完，后续a[]还有没合并，则合并</span>
 		k++;
 		i++;
 	}
-	while (j &lt; blen) {
-		temp[k] = b[j];    //合并完，后续b[]还有没合并，则合并
+	<span class="pl-k">while</span> (j &lt; blen) {
+		temp[k] = b[j];    <span class="pl-c"><span class="pl-c">//</span>合并完，后续b[]还有没合并，则合并</span>
 		k++;
 		j++;
 	}
 }
 
-void mergeSort2(int a[], int alen, int b[], int blen, int *temp) { //6.归并排序优化:两个有序列表合并
-	int i = 0; //左指针
-	int j = 0; //右指针
-	int k = 0; //新数组的下标
-	while (i &lt; alen &amp;&amp; j &lt; blen) temp[k++] = a[i] &lt; b[j] ? a[i++] : b[j++];
-	while (i &lt; alen) temp[k++] = a[i++];
-	while (j &lt; blen) temp[k++] = b[j++];
+<span class="pl-k">void</span> <span class="pl-en">mergeSort2</span>(<span class="pl-k">int</span> a[], <span class="pl-k">int</span> alen, <span class="pl-k">int</span> b[], <span class="pl-k">int</span> blen, <span class="pl-k">int</span> *temp) { <span class="pl-c"><span class="pl-c">//</span>6.归并排序优化:两个有序列表合并</span>
+	<span class="pl-k">int</span> i = <span class="pl-c1">0</span>; <span class="pl-c"><span class="pl-c">//</span>左指针</span>
+	<span class="pl-k">int</span> j = <span class="pl-c1">0</span>; <span class="pl-c"><span class="pl-c">//</span>右指针</span>
+	<span class="pl-k">int</span> k = <span class="pl-c1">0</span>; <span class="pl-c"><span class="pl-c">//</span>新数组的下标</span>
+	<span class="pl-k">while</span> (i &lt; alen &amp;&amp; j &lt; blen) temp[k++] = a[i] &lt; b[j] ? a[i++] : b[j++];
+	<span class="pl-k">while</span> (i &lt; alen) temp[k++] = a[i++];
+	<span class="pl-k">while</span> (j &lt; blen) temp[k++] = b[j++];
 }
 
-void merge(int arr[], int low, int mid, int height, int *temp) { //6.归并排序无序版
-	int i = low;
-	int j = mid + 1;
-	int k = low;
-	while (i &lt;= mid &amp;&amp; j &lt;= height)	temp[k++] = arr[i] &lt; arr[j] ? arr[i++] : arr[j++];
-	while (i &lt;= mid)	 temp[k++] = arr[i++];
-	while (j &lt;= height) temp[k++] = arr[j++];
-	for (i = low; i &lt;= height; i++) arr[i] = temp[i]; //将temp[]复制到a[]
+<span class="pl-k">void</span> <span class="pl-en">merge</span>(<span class="pl-k">int</span> arr[], <span class="pl-k">int</span> low, <span class="pl-k">int</span> mid, <span class="pl-k">int</span> height, <span class="pl-k">int</span> *temp) { <span class="pl-c"><span class="pl-c">//</span>6.归并排序无序版</span>
+	<span class="pl-k">int</span> i = low;
+	<span class="pl-k">int</span> j = mid + <span class="pl-c1">1</span>;
+	<span class="pl-k">int</span> k = low;
+	<span class="pl-k">while</span> (i &lt;= mid &amp;&amp; j &lt;= height)	temp[k++] = arr[i] &lt; arr[j] ? arr[i++] : arr[j++];
+	<span class="pl-k">while</span> (i &lt;= mid)	 temp[k++] = arr[i++];
+	<span class="pl-k">while</span> (j &lt;= height) temp[k++] = arr[j++];
+	<span class="pl-k">for</span> (i = low; i &lt;= height; i++) arr[i] = temp[i]; <span class="pl-c"><span class="pl-c">//</span>将temp[]复制到a[]</span>
 }
 
-void merge_sort(int arr[], int low, int height, int *temp) {
-	if (low &gt;= height) return;
-	int mid = low + (height - low) / 2; //(low+height)/2
-	merge_sort(arr, low, mid, temp);
-	merge_sort(arr, mid + 1, height, temp);
-	merge(arr, low, mid, height, temp);
+<span class="pl-k">void</span> <span class="pl-en">merge_sort</span>(<span class="pl-k">int</span> arr[], <span class="pl-k">int</span> low, <span class="pl-k">int</span> height, <span class="pl-k">int</span> *temp) {
+	<span class="pl-k">if</span> (low &gt;= height) <span class="pl-k">return</span>;
+	<span class="pl-k">int</span> mid = low + (height - low) / <span class="pl-c1">2</span>; <span class="pl-c"><span class="pl-c">//</span>(low+height)/2</span>
+	<span class="pl-c1">merge_sort</span>(arr, low, mid, temp);
+	<span class="pl-c1">merge_sort</span>(arr, mid + <span class="pl-c1">1</span>, height, temp);
+	<span class="pl-c1">merge</span>(arr, low, mid, height, temp);
 }
 
-void mergeSort3(int arr[], int length) {
-	int *temp = (int *)malloc(sizeof(int) * length);
-//	assert(temp);//断点处理
-	merge_sort(arr, 0, length - 1, temp);
-	free(temp);
+<span class="pl-k">void</span> <span class="pl-en">mergeSort3</span>(<span class="pl-k">int</span> arr[], <span class="pl-k">int</span> length) {
+	<span class="pl-k">int</span> *temp = (<span class="pl-k">int</span> *)<span class="pl-c1">malloc</span>(<span class="pl-k">sizeof</span>(<span class="pl-k">int</span>) * length);
+<span class="pl-c"><span class="pl-c">//</span>	assert(temp);//断点处理</span>
+	<span class="pl-c1">merge_sort</span>(arr, <span class="pl-c1">0</span>, length - <span class="pl-c1">1</span>, temp);
+	<span class="pl-c1">free</span>(temp);
 }
 
 
 
-typedef struct Heap { //7.堆排序：堆结构
-	int* root;
-	int length;
+<span class="pl-k">typedef</span> <span class="pl-k">struct</span> <span class="pl-en">Heap</span> { <span class="pl-c"><span class="pl-c">//</span>7.堆排序：堆结构</span>
+	<span class="pl-k">int</span>* root;
+	<span class="pl-k">int</span> length;
 } Heap;
 
-Heap* CreateHeap(int length) { //7.堆排序：申请堆结构（外堆）
-	Heap* heap = (Heap *)malloc(sizeof(Heap));
-	heap-&gt;length = 0;
-	heap-&gt;root = (int *)malloc(sizeof(int) * length);
-	return heap;
+Heap* <span class="pl-en">CreateHeap</span>(<span class="pl-k">int</span> length) { <span class="pl-c"><span class="pl-c">//</span>7.堆排序：申请堆结构（外堆）</span>
+	Heap* heap = (Heap *)<span class="pl-c1">malloc</span>(<span class="pl-k">sizeof</span>(Heap));
+	heap-&gt;<span class="pl-smi">length</span> = <span class="pl-c1">0</span>;
+	heap-&gt;<span class="pl-smi">root</span> = (<span class="pl-k">int</span> *)<span class="pl-c1">malloc</span>(<span class="pl-k">sizeof</span>(<span class="pl-k">int</span>) * length);
+	<span class="pl-k">return</span> heap;
 }
 
-void pushHeap(Heap* heap, int data) {//7.堆排序：入堆（外堆）
-	int current = heap-&gt;length++;//当前的下标++
-	int parent = current / 2;//当前下标的父亲结点下标
-	heap-&gt;root[current] = data;
-	while (parent != current) {
-		if (heap-&gt;root[current] &lt; heap-&gt;root[parent]) { //如果当前结点值比父亲值小，就交换
-			swap(heap-&gt;root[current], heap-&gt;root[parent]);
+<span class="pl-k">void</span> <span class="pl-en">pushHeap</span>(Heap* heap, <span class="pl-k">int</span> data) {<span class="pl-c"><span class="pl-c">//</span>7.堆排序：入堆（外堆）</span>
+	<span class="pl-k">int</span> current = heap-&gt;<span class="pl-smi">length</span>++;<span class="pl-c"><span class="pl-c">//</span>当前的下标++</span>
+	<span class="pl-k">int</span> parent = current / <span class="pl-c1">2</span>;<span class="pl-c"><span class="pl-c">//</span>当前下标的父亲结点下标</span>
+	heap-&gt;<span class="pl-smi">root</span>[current] = data;
+	<span class="pl-k">while</span> (parent != current) {
+		<span class="pl-k">if</span> (heap-&gt;<span class="pl-smi">root</span>[current] &lt; heap-&gt;<span class="pl-smi">root</span>[parent]) { <span class="pl-c"><span class="pl-c">//</span>如果当前结点值比父亲值小，就交换</span>
+			<span class="pl-c1">swap</span>(heap-&gt;<span class="pl-smi">root</span>[current], heap-&gt;<span class="pl-smi">root</span>[parent]);
 			current = parent;
-			parent = current / 2;
-		} else break;
+			parent = current / <span class="pl-c1">2</span>;
+		} <span class="pl-k">else</span> <span class="pl-k">break</span>;
 	}
 }
 
-int popHeap(Heap* heap) { //7.堆排序：出堆（外堆）
-	int val = heap-&gt;root[0]; //堆顶位置
-	int current = 0;
-	int rchild = 2 * current + 2;
-	int small;
-	heap-&gt;root[0] = heap-&gt;root[--heap-&gt;length];//根节点被覆盖
-	while (rchild &lt;= heap-&gt;length) {
-		small = heap-&gt;root[rchild - 1] &lt; heap-&gt;root[rchild] ? rchild - 1 : rchild; //左右子树谁小取谁
-		if (heap-&gt;root[small] &lt; heap-&gt;root[current]) {
-			swap(heap-&gt;root[small], heap-&gt;root[current]);
+<span class="pl-k">int</span> <span class="pl-en">popHeap</span>(Heap* heap) { <span class="pl-c"><span class="pl-c">//</span>7.堆排序：出堆（外堆）</span>
+	<span class="pl-k">int</span> val = heap-&gt;<span class="pl-smi">root</span>[<span class="pl-c1">0</span>]; <span class="pl-c"><span class="pl-c">//</span>堆顶位置</span>
+	<span class="pl-k">int</span> current = <span class="pl-c1">0</span>;
+	<span class="pl-k">int</span> rchild = <span class="pl-c1">2</span> * current + <span class="pl-c1">2</span>;
+	<span class="pl-k">int</span> small;
+	heap-&gt;<span class="pl-smi">root</span>[<span class="pl-c1">0</span>] = heap-&gt;<span class="pl-smi">root</span>[--heap-&gt;<span class="pl-smi">length</span>];<span class="pl-c"><span class="pl-c">//</span>根节点被覆盖</span>
+	<span class="pl-k">while</span> (rchild &lt;= heap-&gt;<span class="pl-smi">length</span>) {
+		small = heap-&gt;<span class="pl-smi">root</span>[rchild - <span class="pl-c1">1</span>] &lt; heap-&gt;<span class="pl-smi">root</span>[rchild] ? rchild - <span class="pl-c1">1</span> : rchild; <span class="pl-c"><span class="pl-c">//</span>左右子树谁小取谁</span>
+		<span class="pl-k">if</span> (heap-&gt;<span class="pl-smi">root</span>[small] &lt; heap-&gt;<span class="pl-smi">root</span>[current]) {
+			<span class="pl-c1">swap</span>(heap-&gt;<span class="pl-smi">root</span>[small], heap-&gt;<span class="pl-smi">root</span>[current]);
 			current = small;
-			rchild = 2 * current + 2;
-		} else break;
+			rchild = <span class="pl-c1">2</span> * current + <span class="pl-c1">2</span>;
+		} <span class="pl-k">else</span> <span class="pl-k">break</span>;
 	}
-	return val;
+	<span class="pl-k">return</span> val;
 }
-/*伪代码
-arr[MXSIZE];
-for(arr){
-pushHeap(heap,arr[i])
-}
-for(arr){
-arr[i]=popHeap(heap)
-}
-*/
+<span class="pl-c"><span class="pl-c">/*</span>伪代码</span>
+<span class="pl-c">arr[MXSIZE];</span>
+<span class="pl-c">for(arr){</span>
+<span class="pl-c">pushHeap(heap,arr[i])</span>
+<span class="pl-c">}</span>
+<span class="pl-c">for(arr){</span>
+<span class="pl-c">arr[i]=popHeap(heap)</span>
+<span class="pl-c">}</span>
+<span class="pl-c"><span class="pl-c">*/</span></span>
 
-void heapSort(int arr[], int length) { //7.堆排序（外堆）
-	Heap* heap = CreateHeap(MAXSIZE);
-	for (int i = 0; i &lt; MAXSIZE; i++)	pushHeap(heap, arr[i]);
-	for (int i = 0; i &lt; MAXSIZE; i++)	arr[i] = popHeap(heap);
-	free(heap-&gt;root);
+<span class="pl-k">void</span> <span class="pl-en">heapSort</span>(<span class="pl-k">int</span> arr[], <span class="pl-k">int</span> length) { <span class="pl-c"><span class="pl-c">//</span>7.堆排序（外堆）</span>
+	Heap* heap = <span class="pl-c1">CreateHeap</span>(MAXSIZE);
+	<span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">0</span>; i &lt; MAXSIZE; i++)	<span class="pl-c1">pushHeap</span>(heap, arr[i]);
+	<span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">0</span>; i &lt; MAXSIZE; i++)	arr[i] = <span class="pl-c1">popHeap</span>(heap);
+	<span class="pl-c1">free</span>(heap-&gt;<span class="pl-smi">root</span>);
 }
 
 
-void Heapify(int arr[], int length, int current) { //7.堆排序（内堆）
-	int rchild = 2 * current + 2;
-	int large;
-	while (rchild &lt;= length) {
-		//
-		large = rchild == length ? rchild - 1 : (arr[rchild - 1] &gt; arr[rchild] ? rchild - 1 : rchild); //左右子树谁大，拿谁
-		if (arr[large] &gt; arr[current]) {
-			swap(arr[large], arr[current]);
+<span class="pl-k">void</span> <span class="pl-en">Heapify</span>(<span class="pl-k">int</span> arr[], <span class="pl-k">int</span> length, <span class="pl-k">int</span> current) { <span class="pl-c"><span class="pl-c">//</span>7.堆排序（内堆）</span>
+	<span class="pl-k">int</span> rchild = <span class="pl-c1">2</span> * current + <span class="pl-c1">2</span>;
+	<span class="pl-k">int</span> large;
+	<span class="pl-k">while</span> (rchild &lt;= length) {
+		<span class="pl-c"><span class="pl-c">//</span></span>
+		large = rchild == length ? rchild - <span class="pl-c1">1</span> : (arr[rchild - <span class="pl-c1">1</span>] &gt; arr[rchild] ? rchild - <span class="pl-c1">1</span> : rchild); <span class="pl-c"><span class="pl-c">//</span>左右子树谁大，拿谁</span>
+		<span class="pl-k">if</span> (arr[large] &gt; arr[current]) {
+			<span class="pl-c1">swap</span>(arr[large], arr[current]);
 			current = large;
-			rchild = 2 * current + 2;
-		} else break;
+			rchild = <span class="pl-c1">2</span> * current + <span class="pl-c1">2</span>;
+		} <span class="pl-k">else</span> <span class="pl-k">break</span>;
 	}
 }
 
 
 
-void heapSort2(int arr[], int length) { //7.堆排序（内堆）
-	int current = length / 2; //取堆的尾点
-	while (current &gt;= 0) {
-		Heapify(arr, length, current);
+<span class="pl-k">void</span> <span class="pl-en">heapSort2</span>(<span class="pl-k">int</span> arr[], <span class="pl-k">int</span> length) { <span class="pl-c"><span class="pl-c">//</span>7.堆排序（内堆）</span>
+	<span class="pl-k">int</span> current = length / <span class="pl-c1">2</span>; <span class="pl-c"><span class="pl-c">//</span>取堆的尾点</span>
+	<span class="pl-k">while</span> (current &gt;= <span class="pl-c1">0</span>) {
+		<span class="pl-c1">Heapify</span>(arr, length, current);
 		current--;
 	}
-	while (length) {
-		swap(arr[0], arr[--length]);
-		Heapify(arr, length, 0);
+	<span class="pl-k">while</span> (length) {
+		<span class="pl-c1">swap</span>(arr[<span class="pl-c1">0</span>], arr[--length]);
+		<span class="pl-c1">Heapify</span>(arr, length, <span class="pl-c1">0</span>);
 
 	}
 }
 
 
-int temp[N];
-void countSort(int arr[], int length) { //9.计数排序
-	for (int i = 0; i &lt; length; i++)	temp[arr[i]]++;
-	for (int i = 0, j = 0; i &lt; N; i++) {
-		while (temp[i]--)arr[j++] = i;
+<span class="pl-k">int</span> temp[N];
+<span class="pl-k">void</span> <span class="pl-en">countSort</span>(<span class="pl-k">int</span> arr[], <span class="pl-k">int</span> length) { <span class="pl-c"><span class="pl-c">//</span>9.计数排序</span>
+	<span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">0</span>; i &lt; length; i++)	temp[arr[i]]++;
+	<span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">0</span>, j = <span class="pl-c1">0</span>; i &lt; N; i++) {
+		<span class="pl-k">while</span> (temp[i]--)arr[j++] = i;
 	}
 }
 
-int Temp[10][N];
-void redixSort(int arr[], int length) { //10.基数排序
-	int i, j, pos;
-	for (int k = 10; k &lt; 10000; k * = 10) {
-		for (i = 0; i &lt; length; i++) {
-			j = 0;
-			pos = (arr[i] % k) / (k / 10);
-			while (Temp[pos][j])j++;
+<span class="pl-k">int</span> Temp[<span class="pl-c1">10</span>][N];
+<span class="pl-k">void</span> <span class="pl-en">redixSort</span>(<span class="pl-k">int</span> arr[], <span class="pl-k">int</span> length) { <span class="pl-c"><span class="pl-c">//</span>10.基数排序</span>
+	<span class="pl-k">int</span> i, j, pos;
+	<span class="pl-k">for</span> (<span class="pl-k">int</span> k = <span class="pl-c1">10</span>; k &lt; <span class="pl-c1">10000</span>; k * = <span class="pl-c1">10</span>) {
+		<span class="pl-k">for</span> (i = <span class="pl-c1">0</span>; i &lt; length; i++) {
+			j = <span class="pl-c1">0</span>;
+			pos = (arr[i] % k) / (k / <span class="pl-c1">10</span>);
+			<span class="pl-k">while</span> (Temp[pos][j])j++;
 			Temp[pos][j] = arr[i];
 		}
-		pos = 0;
-		for (int i = 0; i &lt; 10; i++) {
-			for (int j = 0; j &lt; length &amp;&amp; Temp[i][j] != 0; j++) {
+		pos = <span class="pl-c1">0</span>;
+		<span class="pl-k">for</span> (<span class="pl-k">int</span> i = <span class="pl-c1">0</span>; i &lt; <span class="pl-c1">10</span>; i++) {
+			<span class="pl-k">for</span> (<span class="pl-k">int</span> j = <span class="pl-c1">0</span>; j &lt; length &amp;&amp; Temp[i][j] != <span class="pl-c1">0</span>; j++) {
 				arr[pos++] = Temp[i][j];
-				Temp[i][j] = 0;
+				Temp[i][j] = <span class="pl-c1">0</span>;
 			}
 		}
 	}
 }
 
-int main() {
-	srand((unsigned int)time(NULL));
-	int arr[MAXSIZE];
+<span class="pl-k">int</span> <span class="pl-en">main</span>() {
+	<span class="pl-c1">srand</span>((<span class="pl-k">unsigned</span> <span class="pl-k">int</span>)<span class="pl-c1">time</span>(<span class="pl-c1">NULL</span>));
+	<span class="pl-k">int</span> arr[MAXSIZE];
 
-	initArr(arr, MAXSIZE);
-	showArr(arr, MAXSIZE);
-
-
-	/*
-	printf("冒泡排序：\n");
-	bubSort1(arr,MAXSIZE);
-	showArr(arr,MAXSIZE);
-
-	printf("选择排序：\n");
-	selectSort(arr,MAXSIZE);
-	showArr(arr,MAXSIZE);
-
-	printf("插入排序：\n");
-	insertSort(arr,MAXSIZE);
-	showArr(arr,MAXSIZE);
-
-	printf("希尔排序：\n");
-	shellSort1(arr,MAXSIZE);
-	showArr(arr,MAXSIZE);
+	<span class="pl-c1">initArr</span>(arr, MAXSIZE);
+	<span class="pl-c1">showArr</span>(arr, MAXSIZE);
 
 
-	printf("希尔排序：\n");
-	quickSort2(arr,0,MAXSIZE-1);
-	showArr(arr,MAXSIZE);
-	*/
+	<span class="pl-c"><span class="pl-c">/*</span></span>
+<span class="pl-c">	printf("冒泡排序：\n");</span>
+<span class="pl-c">	bubSort1(arr,MAXSIZE);</span>
+<span class="pl-c">	showArr(arr,MAXSIZE);</span>
+<span class="pl-c"></span>
+<span class="pl-c">	printf("选择排序：\n");</span>
+<span class="pl-c">	selectSort(arr,MAXSIZE);</span>
+<span class="pl-c">	showArr(arr,MAXSIZE);</span>
+<span class="pl-c"></span>
+<span class="pl-c">	printf("插入排序：\n");</span>
+<span class="pl-c">	insertSort(arr,MAXSIZE);</span>
+<span class="pl-c">	showArr(arr,MAXSIZE);</span>
+<span class="pl-c"></span>
+<span class="pl-c">	printf("希尔排序：\n");</span>
+<span class="pl-c">	shellSort1(arr,MAXSIZE);</span>
+<span class="pl-c">	showArr(arr,MAXSIZE);</span>
+<span class="pl-c"></span>
+<span class="pl-c"></span>
+<span class="pl-c">	printf("希尔排序：\n");</span>
+<span class="pl-c">	quickSort2(arr,0,MAXSIZE-1);</span>
+<span class="pl-c">	showArr(arr,MAXSIZE);</span>
+<span class="pl-c">	<span class="pl-c">*/</span></span>
 
-	/*
-	printf("归并排序：\n");
-	int a[5]={1,3,5,7,9};
-	int b[3]={2,8,10};
-	int temp[8];
-	mergeSort2(a,5,b,3,temp);
-	showArr(temp,8);
+	<span class="pl-c"><span class="pl-c">/*</span></span>
+<span class="pl-c">	printf("归并排序：\n");</span>
+<span class="pl-c">	int a[5]={1,3,5,7,9};</span>
+<span class="pl-c">	int b[3]={2,8,10};</span>
+<span class="pl-c">	int temp[8];</span>
+<span class="pl-c">	mergeSort2(a,5,b,3,temp);</span>
+<span class="pl-c">	showArr(temp,8);</span>
+<span class="pl-c"></span>
+<span class="pl-c">	mergeSort3(arr,MAXSIZE);</span>
+<span class="pl-c">	showArr(arr,MAXSIZE);</span>
+<span class="pl-c">	<span class="pl-c">*/</span></span>
 
-	mergeSort3(arr,MAXSIZE);
-	showArr(arr,MAXSIZE);
-	*/
-
-	/*
-	printf("堆排序(外堆)：\n");
-	heapSort(arr,MAXSIZE);
-	showArr(arr,MAXSIZE);
-
-	printf("堆排序（内堆）：\n");
-	heapSort2(arr,MAXSIZE);
-	showArr(arr,MAXSIZE);
-	*/
-	/*
-	printf("计数排序：\n");
-	countSort(arr,MAXSIZE);
-	showArr(arr,MAXSIZE);
-	*/
-	printf("计数排序：\n");
-	redixSort(arr, MAXSIZE);
-	showArr(arr, MAXSIZE);
-	system("pause");
-	return 0;
+	<span class="pl-c"><span class="pl-c">/*</span></span>
+<span class="pl-c">	printf("堆排序(外堆)：\n");</span>
+<span class="pl-c">	heapSort(arr,MAXSIZE);</span>
+<span class="pl-c">	showArr(arr,MAXSIZE);</span>
+<span class="pl-c"></span>
+<span class="pl-c">	printf("堆排序（内堆）：\n");</span>
+<span class="pl-c">	heapSort2(arr,MAXSIZE);</span>
+<span class="pl-c">	showArr(arr,MAXSIZE);</span>
+<span class="pl-c">	<span class="pl-c">*/</span></span>
+	<span class="pl-c"><span class="pl-c">/*</span></span>
+<span class="pl-c">	printf("计数排序：\n");</span>
+<span class="pl-c">	countSort(arr,MAXSIZE);</span>
+<span class="pl-c">	showArr(arr,MAXSIZE);</span>
+<span class="pl-c">	<span class="pl-c">*/</span></span>
+	<span class="pl-c1">printf</span>(<span class="pl-s"><span class="pl-pds">"</span>计数排序：<span class="pl-cce">\n</span><span class="pl-pds">"</span></span>);
+	<span class="pl-c1">redixSort</span>(arr, MAXSIZE);
+	<span class="pl-c1">showArr</span>(arr, MAXSIZE);
+	<span class="pl-c1">system</span>(<span class="pl-s"><span class="pl-pds">"</span>pause<span class="pl-pds">"</span></span>);
+	<span class="pl-k">return</span> <span class="pl-c1">0</span>;
 }</pre></div></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
